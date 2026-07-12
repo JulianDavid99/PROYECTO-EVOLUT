@@ -1,17 +1,13 @@
 from flask import Flask
-from db import obtener_conexion
+from routes.auth import auth
 
 app = Flask(__name__)
 
+app.register_blueprint(auth, url_prefix="/api/auth")
+
 @app.route("/")
 def inicio():
-    try:
-        conexion = obtener_conexion()
-        conexion.close()
-        return "✅ Conexión exitosa con PostgreSQL"
-    except Exception as e:
-        return f"❌ Error de conexión: {e}"
-
+    return "Backend de Evolut funcionando"
 
 if __name__ == "__main__":
     app.run(debug=True)
