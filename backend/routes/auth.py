@@ -50,3 +50,49 @@ def register():
     return {
         "mensaje": "Usuario registrado correctamente"
     }
+
+@auth.route("/login", methods=["POST"])
+def login():
+
+    datos = request.get_json()
+
+    correo = datos.get("correo")
+    contrasena = datos.get("contrasena")
+
+    if not correo or not contrasena:
+        return {
+            "mensaje": "Todos los campos son obligatorios"
+        }, 400
+
+    conexion = obtener_conexion()
+    cursor = conexion.cursor()
+
+    cursor.execute(
+        "SELECT * FROM usuarios WHERE correo = %s",
+        (correo,)
+    )
+
+    usuario = cursor.fetchone()
+
+    if not usuario:
+        cursor.close()
+        conexion.close()
+
+        return {
+            "mensaje": "El usuario no existe"
+        }, 404
+
+    if usuario[3] != contrasena:
+        cursor.close()
+        conexion.close()
+
+        return {
+            "mensaje": "Contraseña incorrecta"
+        }, 401
+
+    cursor.close()
+    conexion.close()
+
+    return {
+        "mensaje": "Inicio de sesión exitoso"
+    }, 200
