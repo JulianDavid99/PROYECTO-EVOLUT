@@ -12,8 +12,27 @@ def register():
     correo = datos.get("correo")
     contrasena = datos.get("contrasena")
 
+    if not nombre or not correo or not contrasena:
+        return {
+            "mensaje": "Todos los campos son obligatorios"
+        }, 400
+
     conexion = obtener_conexion()
     cursor = conexion.cursor()
+
+    cursor.execute(
+        "SELECT * FROM usuarios WHERE correo = %s",
+        (correo,)
+    )
+
+    usuario_existente = cursor.fetchone()
+
+    if usuario_existente:
+        cursor.close()
+        conexion.close()
+        return {
+            "mensaje": "El correo ya está registrado"
+        }, 400
 
     cursor.execute(
         """
