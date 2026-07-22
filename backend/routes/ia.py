@@ -39,8 +39,32 @@ def analizar():
 
         conexion.commit()
 
+        # Obtener historial completo de la conversación
+        cursor.execute("""
+            SELECT contenido, rol
+            FROM mensajes
+            WHERE conversacion_id = %s
+            ORDER BY fecha_creacion ASC
+        """, (conversacion_id,))
+
+        mensajes_bd = cursor.fetchall()
+
+        historial = []
+
+        for contenido, rol in mensajes_bd:
+
+            if rol == "usuario":
+                role = "user"
+            else:
+                role = "assistant"
+
+            historial.append({
+                "role": role,
+                "content": contenido
+            })
+
         # Obtener respuesta de OpenAI
-        respuesta = generar_respuesta(mensaje)
+        respuesta = generar_respuesta(historial)
 
         # Guardar respuesta de la IA
         cursor.execute("""
