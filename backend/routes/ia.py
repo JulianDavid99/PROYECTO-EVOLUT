@@ -1,7 +1,6 @@
 from flask import Blueprint, request
 
-from db import obtener_conexion
-from services.openai_service import generar_respuesta
+from services.conversacion_service import procesar_conversacion
 
 ia = Blueprint("ia", __name__)
 
@@ -24,57 +23,12 @@ def analizar():
             "mensaje": "La conversación es obligatoria"
         }, 400
 
-    conexion = obtener_conexion()
-    cursor = conexion.cursor()
-
     try:
 
-        # Guardar mensaje del usuario
-        cursor.execute("""
-            INSERT INTO mensajes
-            (contenido, rol, fecha_creacion, conversacion_id)
-            VALUES
-            (%s, %s, NOW(), %s)
-        """, (mensaje, "usuario", conversacion_id))
-
-        conexion.commit()
-
-        # Obtener historial completo de la conversación
-        cursor.execute("""
-            SELECT contenido, rol
-            FROM mensajes
-            WHERE conversacion_id = %s
-            ORDER BY fecha_creacion ASC
-        """, (conversacion_id,))
-
-        mensajes_bd = cursor.fetchall()
-
-        historial = []
-
-        for contenido, rol in mensajes_bd:
-
-            if rol == "usuario":
-                role = "user"
-            else:
-                role = "assistant"
-
-            historial.append({
-                "role": role,
-                "content": contenido
-            })
-
-        # Obtener respuesta de OpenAI
-        respuesta = generar_respuesta(historial)
-
-        # Guardar respuesta de la IA
-        cursor.execute("""
-            INSERT INTO mensajes
-            (contenido, rol, fecha_creacion, conversacion_id)
-            VALUES
-            (%s, %s, NOW(), %s)
-        """, (respuesta, "ia", conversacion_id))
-
-        conexion.commit()
+        respuesta = procesar_conversacion(
+            conversacion_id,
+            mensaje
+        )
 
         return {
             "respuesta": respuesta
@@ -82,14 +36,7 @@ def analizar():
 
     except Exception as e:
 
-        conexion.rollback()
-
         return {
             "mensaje": "Error al comunicarse con OpenAI",
             "error": str(e)
         }, 500
-
-    finally:
-
-        cursor.close()
-        conexion.close()
