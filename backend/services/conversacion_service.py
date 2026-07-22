@@ -19,6 +19,22 @@ def procesar_conversacion(conversacion_id, mensaje):
 
         conexion.commit()
 
+        # Obtener información de la conversación
+        cursor.execute("""
+            SELECT
+                c.titulo,
+                cat.nombre
+            FROM conversaciones c
+            JOIN categorias cat
+                ON c.categoria_id = cat.id
+            WHERE c.id = %s
+        """, (conversacion_id,))
+
+        conversacion = cursor.fetchone()
+
+        titulo = conversacion[0]
+        categoria = conversacion[1]
+
         # Obtener historial
         cursor.execute("""
             SELECT contenido, rol
@@ -31,6 +47,19 @@ def procesar_conversacion(conversacion_id, mensaje):
 
         historial = []
 
+        # Contexto de la conversación
+        historial.append({
+            "role": "system",
+            "content": f"""
+Categoría de la conversación: {categoria}
+
+Título de la conversación: {titulo}
+
+Utiliza esta información únicamente como contexto para comprender mejor de qué trata la conversación.
+"""
+        })
+
+        # Historial de mensajes
         for contenido, rol in mensajes_bd:
 
             historial.append({
