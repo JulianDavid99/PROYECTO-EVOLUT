@@ -10,13 +10,11 @@ def obtener_conversaciones():
     conexion = obtener_conexion()
     cursor = conexion.cursor()
 
-    cursor.execute(
-        """
+    cursor.execute("""
         SELECT *
         FROM conversaciones
-        ORDER BY id
-        """
-    )
+        ORDER BY id DESC
+    """)
 
     conversaciones_db = cursor.fetchall()
 
@@ -26,6 +24,7 @@ def obtener_conversaciones():
     resultado = []
 
     for conversacion in conversaciones_db:
+
         resultado.append({
             "id": conversacion[0],
             "titulo": conversacion[1],
@@ -62,6 +61,7 @@ def crear_conversacion():
     usuario = cursor.fetchone()
 
     if not usuario:
+
         cursor.close()
         conexion.close()
 
@@ -77,6 +77,7 @@ def crear_conversacion():
     categoria = cursor.fetchone()
 
     if not categoria:
+
         cursor.close()
         conexion.close()
 
@@ -84,14 +85,18 @@ def crear_conversacion():
             "mensaje": "La categoría no existe"
         }, 404
 
-    cursor.execute(
-        """
+    cursor.execute("""
         INSERT INTO conversaciones
         (titulo, usuario_id, categoria_id)
         VALUES (%s, %s, %s)
-        """,
-        (titulo, usuario_id, categoria_id)
-    )
+        RETURNING id
+    """, (
+        titulo,
+        usuario_id,
+        categoria_id
+    ))
+
+    conversacion_id = cursor.fetchone()[0]
 
     conexion.commit()
 
@@ -99,7 +104,11 @@ def crear_conversacion():
     conexion.close()
 
     return {
-        "mensaje": "Conversación creada correctamente"
+        "mensaje": "Conversación creada correctamente",
+        "id": conversacion_id,
+        "titulo": titulo,
+        "usuario_id": usuario_id,
+        "categoria_id": categoria_id
     }, 201
 
 
@@ -111,6 +120,7 @@ def actualizar_conversacion(id):
     titulo = datos.get("titulo")
 
     if not titulo:
+
         return {
             "mensaje": "El título es obligatorio"
         }, 400
@@ -126,6 +136,7 @@ def actualizar_conversacion(id):
     conversacion = cursor.fetchone()
 
     if not conversacion:
+
         cursor.close()
         conexion.close()
 
@@ -133,14 +144,14 @@ def actualizar_conversacion(id):
             "mensaje": "La conversación no existe"
         }, 404
 
-    cursor.execute(
-        """
+    cursor.execute("""
         UPDATE conversaciones
         SET titulo = %s
         WHERE id = %s
-        """,
-        (titulo, id)
-    )
+    """, (
+        titulo,
+        id
+    ))
 
     conexion.commit()
 
@@ -166,6 +177,7 @@ def eliminar_conversacion(id):
     conversacion = cursor.fetchone()
 
     if not conversacion:
+
         cursor.close()
         conexion.close()
 

@@ -4,14 +4,24 @@ from db import obtener_conexion
 mensajes = Blueprint("mensajes", __name__)
 
 
-@mensajes.route("/", methods=["GET"])
-def obtener_mensajes():
+# ==========================================
+# OBTENER MENSAJES DE UNA CONVERSACIÓN
+# ==========================================
+
+@mensajes.route("/<int:conversacion_id>", methods=["GET"])
+def obtener_mensajes(conversacion_id):
 
     conexion = obtener_conexion()
     cursor = conexion.cursor()
 
     cursor.execute(
-        "SELECT * FROM mensajes ORDER BY id"
+        """
+        SELECT *
+        FROM mensajes
+        WHERE conversacion_id = %s
+        ORDER BY fecha_creacion ASC
+        """,
+        (conversacion_id,)
     )
 
     mensajes_db = cursor.fetchall()
@@ -22,16 +32,23 @@ def obtener_mensajes():
     resultado = []
 
     for mensaje in mensajes_db:
+
         resultado.append({
+
             "id": mensaje[0],
             "contenido": mensaje[1],
             "rol": mensaje[2],
             "fecha_creacion": str(mensaje[3]),
             "conversacion_id": mensaje[4]
+
         })
 
     return resultado, 200
 
+
+# ==========================================
+# CREAR MENSAJE
+# ==========================================
 
 @mensajes.route("/", methods=["POST"])
 def crear_mensaje():
@@ -43,11 +60,13 @@ def crear_mensaje():
     conversacion_id = datos.get("conversacion_id")
 
     if not contenido or not rol or not conversacion_id:
+
         return {
             "mensaje": "Todos los campos son obligatorios"
         }, 400
 
     if rol not in ["usuario", "ia"]:
+
         return {
             "mensaje": "El rol debe ser 'usuario' o 'ia'"
         }, 400
@@ -56,13 +75,14 @@ def crear_mensaje():
     cursor = conexion.cursor()
 
     cursor.execute(
-        "SELECT * FROM conversaciones WHERE id = %s",
+        "SELECT id FROM conversaciones WHERE id = %s",
         (conversacion_id,)
     )
 
     conversacion = cursor.fetchone()
 
     if not conversacion:
+
         cursor.close()
         conexion.close()
 
@@ -72,11 +92,20 @@ def crear_mensaje():
 
     cursor.execute(
         """
-        INSERT INTO mensajes (contenido, rol, conversacion_id)
-        VALUES (%s, %s, %s)
-        """,
+        INSERT INTO mensajes
         (contenido, rol, conversacion_id)
+        VALUES
+        (%s, %s, %s)
+        RETURNING id
+        """,
+        (
+            contenido,
+            rol,
+            conversacion_id
+        )
     )
+
+    mensaje_id = cursor.fetchone()[0]
 
     conexion.commit()
 
@@ -84,9 +113,19 @@ def crear_mensaje():
     conexion.close()
 
     return {
-        "mensaje": "Mensaje creado correctamente"
+
+        "mensaje": "Mensaje creado correctamente",
+        "id": mensaje_id,
+        "contenido": contenido,
+        "rol": rol,
+        "conversacion_id": conversacion_id
+
     }, 201
 
+
+# ==========================================
+# ACTUALIZAR MENSAJE
+# ==========================================
 
 @mensajes.route("/<int:id>", methods=["PUT"])
 def actualizar_mensaje(id):
@@ -96,6 +135,7 @@ def actualizar_mensaje(id):
     contenido = datos.get("contenido")
 
     if not contenido:
+
         return {
             "mensaje": "El contenido es obligatorio"
         }, 400
@@ -104,13 +144,14 @@ def actualizar_mensaje(id):
     cursor = conexion.cursor()
 
     cursor.execute(
-        "SELECT * FROM mensajes WHERE id = %s",
+        "SELECT id FROM mensajes WHERE id = %s",
         (id,)
     )
 
     mensaje = cursor.fetchone()
 
     if not mensaje:
+
         cursor.close()
         conexion.close()
 
@@ -124,7 +165,10 @@ def actualizar_mensaje(id):
         SET contenido = %s
         WHERE id = %s
         """,
-        (contenido, id)
+        (
+            contenido,
+            id
+        )
     )
 
     conexion.commit()
@@ -133,9 +177,15 @@ def actualizar_mensaje(id):
     conexion.close()
 
     return {
+
         "mensaje": "Mensaje actualizado correctamente"
+
     }, 200
 
+
+# ==========================================
+# ELIMINAR MENSAJE
+# ==========================================
 
 @mensajes.route("/<int:id>", methods=["DELETE"])
 def eliminar_mensaje(id):
@@ -144,13 +194,14 @@ def eliminar_mensaje(id):
     cursor = conexion.cursor()
 
     cursor.execute(
-        "SELECT * FROM mensajes WHERE id = %s",
+        "SELECT id FROM mensajes WHERE id = %s",
         (id,)
     )
 
     mensaje = cursor.fetchone()
 
     if not mensaje:
+
         cursor.close()
         conexion.close()
 
@@ -169,5 +220,7 @@ def eliminar_mensaje(id):
     conexion.close()
 
     return {
+
         "mensaje": "Mensaje eliminado correctamente"
+
     }, 200

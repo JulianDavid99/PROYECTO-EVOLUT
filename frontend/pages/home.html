@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Evolut</title>
+
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/home.css">
+
+</head>
+
+<body>
+
+<div class="layout">
+
+    <!--====================================
+                SIDEBAR
+    =====================================-->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-top">
+
+            <div class="logo">
+
+                ▲
+
+            </div>
+
+            <h2>
+
+                EVOLUT
+
+            </h2>
+
+            <button id="btnNueva">
+
+                + Nueva reflexión
+
+            </button>
+
+            <div class="section-title">
+
+                Conversaciones
+
+            </div>
+
+            <div id="listaConversaciones">
+
+            </div>
+
+        </div>
+
+        <div class="sidebar-footer">
+
+            <a href="profile.html">
+
+                Mi perfil
+
+            </a>
+
+        </div>
+
+    </aside>
+
+    <!--====================================
+                CONTENIDO
+    =====================================-->
+
+    <main class="content">
+
+        <div class="welcome">
+
+            <h1>
+
+                ¿Sobre qué quieres reflexionar hoy?
+
+            </h1>
+
+            <p>
+
+                Escribe un pensamiento, una situación o una decisión.
+                Evolut analizará el contexto y te ayudará a reflexionar.
+
+            </p>
+
+        </div>
+
+        <div
+            id="chatArea"
+            class="chat-area">
+
+        </div>
+
+        <form id="formMensaje">
+
+            <textarea
+                id="mensaje"
+                placeholder="Escribe aquí tu reflexión..."
+                rows="3"></textarea>
+
+            <button
+                type="submit">
+
+                Enviar
+
+            </button>
+
+        </form>
+
+    </main>
+
+</div>
+
+<!--====================================
+            MODAL CATEGORÍAS
+=====================================-->
+
+<div id="modalCategoria" class="modal">
+
+    <div class="modal-content">
+
+        <h2>
+
+            Nueva reflexión
+
+        </h2>
+
+        <p>
+
+            Selecciona el área sobre la que deseas reflexionar.
+
+        </p>
+
+        <select id="categoriaSelect">
+
+</select>
+
+        <button id="btnContinuar">
+
+            Continuar
+
+        </button>
+
+    </div>
+
+</div>
+
+<script src="../js/api.js"></script>
+<script src="../js/home.js"></script>
+<script src="../js/chat.js"></script>
+
+</body>
+
+</html>

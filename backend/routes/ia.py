@@ -1,6 +1,6 @@
 from flask import Blueprint, request
-
 from services.conversacion_service import procesar_conversacion
+import traceback
 
 ia = Blueprint("ia", __name__)
 
@@ -35,6 +35,10 @@ def analizar():
         }, 200
 
     except Exception as e:
+
+        print("\n========== ERROR OPENAI ==========")
+        traceback.print_exc()
+        print("==================================\n")
 
         return {
             "mensaje": "Error al comunicarse con OpenAI",

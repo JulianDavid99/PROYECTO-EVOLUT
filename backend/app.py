@@ -1,4 +1,6 @@
 from flask import Flask
+from flask_cors import CORS
+
 from routes.auth import auth
 from routes.categorias import categorias
 from routes.conversaciones import conversaciones
@@ -7,6 +9,8 @@ from routes.admin import admin
 from routes.ia import ia
 
 app = Flask(__name__)
+
+CORS(app)
 
 app.register_blueprint(auth, url_prefix="/api/auth")
 app.register_blueprint(categorias, url_prefix="/api/categorias")
@@ -17,7 +21,7 @@ app.register_blueprint(ia, url_prefix="/api/ia")
 
 @app.route("/")
 def inicio():
-    return "Backend de Evolut funcionando"                                                                                                                                      
+    return "Backend de Evolut funcionando"
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)
