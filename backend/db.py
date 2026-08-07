@@ -11,7 +11,7 @@ def obtener_conexion():
     # Producción (Neon / Render)
     if database_url:
 
-        return psycopg2.connect(database_url)
+        return psycopg2.connect(dsn=database_url)
 
     # Desarrollo local
     return psycopg2.connect(
