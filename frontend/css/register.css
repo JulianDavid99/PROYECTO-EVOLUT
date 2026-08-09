@@ -1,0 +1,920 @@
+@import url("variables.css");
+
+
+/* =====================================================
+   PÁGINA
+===================================================== */
+
+body {
+
+    margin: 0;
+
+    min-height: 100vh;
+
+    background:
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(20, 65, 150, 0.20),
+            transparent 48%
+        ),
+        linear-gradient(
+            135deg,
+            #020617 0%,
+            #081431 45%,
+            #111D45 100%
+        );
+
+    font-family: var(--font-family);
+
+}
+
+
+/* =====================================================
+   CONTENEDOR
+===================================================== */
+
+.register-page {
+
+    min-height: 100vh;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 30px;
+
+    box-sizing: border-box;
+
+}
+
+
+/* =====================================================
+   TARJETA
+===================================================== */
+
+.register-card {
+
+    width: min(1050px, calc(100vw - 60px));
+
+    min-height: 720px;
+
+    display: flex;
+
+    overflow: hidden;
+
+    position: relative;
+
+    border-radius: 28px;
+
+    background: white;
+
+    border: 1px solid #3B82F6;
+
+    box-shadow:
+        0 0 7px rgba(37, 99, 235, 0.95),
+        0 0 22px rgba(37, 99, 235, 0.65),
+        0 0 45px rgba(37, 99, 235, 0.25),
+        0 30px 80px rgba(0, 0, 0, 0.50);
+
+}
+
+
+/* =====================================================
+   PANEL IZQUIERDO
+===================================================== */
+
+.register-left {
+
+    width: 43%;
+
+    box-sizing: border-box;
+
+    position: relative;
+
+    overflow: hidden;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    padding: 58px 58px 52px;
+
+    color: white;
+
+    background:
+        radial-gradient(
+            circle at 92% 100%,
+            rgba(0, 74, 255, 0.62),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 0% 0%,
+            rgba(43, 105, 255, 0.34),
+            transparent 30%
+        ),
+        linear-gradient(
+            145deg,
+            #0B1D4D 0%,
+            #071333 27%,
+            #02091F 68%,
+            #010619 100%
+        );
+
+}
+
+
+.register-left::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 430px;
+
+    height: 430px;
+
+    left: -235px;
+
+    top: -225px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(46, 110, 255, 0.25),
+            transparent 68%
+        );
+
+    pointer-events: none;
+
+}
+
+
+.register-left::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 430px;
+
+    height: 430px;
+
+    right: -220px;
+
+    bottom: -260px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(0, 80, 255, 0.55),
+            transparent 68%
+        );
+
+    pointer-events: none;
+
+}
+
+
+/* =====================================================
+   MARCA
+===================================================== */
+
+.brand {
+
+    position: relative;
+
+    z-index: 2;
+
+}
+
+
+/* =====================================================
+   LOGO
+===================================================== */
+
+.evolut-symbol {
+
+    width: 180px;
+
+    height: 180px;
+
+    border-radius: 32px;
+
+    position: relative;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 17px;
+
+    margin-bottom: 24px;
+
+    background:
+        radial-gradient(
+            circle at 50% 35%,
+            rgba(24, 63, 135, 0.25),
+            transparent 60%
+        ),
+        #02091F;
+
+    border: 2px solid rgba(37, 115, 255, 0.95);
+
+    box-shadow:
+        0 0 7px rgba(37, 115, 255, 0.95),
+        0 0 18px rgba(37, 115, 255, 0.70),
+        0 0 35px rgba(37, 115, 255, 0.35),
+        inset 0 0 28px rgba(21, 71, 170, 0.20);
+
+}
+
+
+.symbol-bar {
+
+    width: 85px;
+
+    height: 23px;
+
+    border-radius: 7px;
+
+    transform: skewX(-18deg);
+
+}
+
+
+.symbol-top {
+
+    background:
+        linear-gradient(
+            135deg,
+            #2388FF 0%,
+            #0057FF 100%
+        );
+
+    box-shadow:
+        0 0 8px rgba(25, 117, 255, 0.95),
+        0 0 20px rgba(25, 117, 255, 0.50);
+
+}
+
+
+.symbol-middle {
+
+    background:
+        linear-gradient(
+            135deg,
+            #FFFFFF 0%,
+            #E7EAF0 100%
+        );
+
+    box-shadow:
+        0 0 8px rgba(255, 255, 255, 0.55);
+
+}
+
+
+.symbol-bottom {
+
+    background:
+        linear-gradient(
+            135deg,
+            #2388FF 0%,
+            #0057FF 100%
+        );
+
+    box-shadow:
+        0 0 8px rgba(25, 117, 255, 0.95),
+        0 0 20px rgba(25, 117, 255, 0.50);
+
+}
+
+
+/* =====================================================
+   EVOLUT
+===================================================== */
+
+.brand h1 {
+
+    margin: 0 0 26px;
+
+    color: white;
+
+    font-size: 42px;
+
+    line-height: 1;
+
+    font-weight: 600;
+
+    letter-spacing: 8px;
+
+}
+
+
+/* =====================================================
+   TAGLINE
+===================================================== */
+
+.tagline {
+
+    margin: 0;
+
+    color: #F2F6FF;
+
+    font-size: 18px;
+
+    line-height: 1.9;
+
+}
+
+
+/* =====================================================
+   REFLEXIÓN
+===================================================== */
+
+.reflection {
+
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 360px;
+
+}
+
+
+.reflection p {
+
+    min-height: 58px;
+
+    margin: 0 0 25px;
+
+    color: #F4F7FF;
+
+    font-size: 15px;
+
+    line-height: 1.65;
+
+    transition: opacity 0.18s ease;
+
+}
+
+
+/* =====================================================
+   PUNTOS
+===================================================== */
+
+.dots {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+}
+
+
+.dot {
+
+    width: 10px;
+
+    height: 10px;
+
+    padding: 0;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.25);
+
+    cursor: pointer;
+
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease,
+        box-shadow 0.25s ease;
+
+}
+
+
+.dot:hover {
+
+    transform: scale(1.15);
+
+    background: rgba(255, 255, 255, 0.65);
+
+}
+
+
+.dot.active {
+
+    background: white;
+
+    transform: scale(1.15);
+
+    box-shadow:
+        0 0 7px rgba(255, 255, 255, 0.85),
+        0 0 15px rgba(59, 130, 246, 0.75);
+
+}
+
+
+/* =====================================================
+   PANEL DERECHO
+===================================================== */
+
+.register-right {
+
+    width: 57%;
+
+    box-sizing: border-box;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 48px 70px;
+
+    background: white;
+
+}
+
+
+/* =====================================================
+   FORMULARIO
+===================================================== */
+
+.form-container {
+
+    width: 100%;
+
+    max-width: 500px;
+
+}
+
+
+.form-container h2 {
+
+    margin: 0 0 10px;
+
+    color: #0F172A;
+
+    font-size: 35px;
+
+    line-height: 1.2;
+
+    font-weight: 700;
+
+}
+
+
+.subtitle {
+
+    margin: 0 0 32px;
+
+    color: #64748B;
+
+    font-size: 15px;
+
+}
+
+
+/* =====================================================
+   FORM
+===================================================== */
+
+form {
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+
+label {
+
+    margin-bottom: 7px;
+
+    color: #1E293B;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+}
+
+
+/* =====================================================
+   INPUT
+===================================================== */
+
+.input-wrapper {
+
+    width: 100%;
+
+    position: relative;
+
+    margin-bottom: 18px;
+
+}
+
+
+.input-wrapper input {
+
+    width: 100%;
+
+    height: 55px;
+
+    box-sizing: border-box;
+
+    padding: 0 55px;
+
+    border: 1px solid #C7D5EF;
+
+    border-radius: 13px;
+
+    outline: none;
+
+    background: white;
+
+    color: #111827;
+
+    font-family: inherit;
+
+    font-size: 15px;
+
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+
+}
+
+
+.input-wrapper input::placeholder {
+
+    color: #9AAACC;
+
+}
+
+
+.input-wrapper input:focus {
+
+    border-color: #69A5FF;
+
+    box-shadow:
+        0 0 0 3px rgba(59, 130, 246, 0.08),
+        0 0 16px rgba(59, 130, 246, 0.32),
+        0 7px 22px rgba(37, 99, 235, 0.10);
+
+}
+
+
+/* =====================================================
+   ICONOS
+===================================================== */
+
+.input-icon {
+
+    position: absolute;
+
+    left: 19px;
+
+    top: 50%;
+
+    width: 22px;
+
+    height: 22px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    transform: translateY(-50%);
+
+    color: #334155;
+
+    pointer-events: none;
+
+    z-index: 2;
+
+}
+
+
+.input-icon svg {
+
+    width: 21px;
+
+    height: 21px;
+
+    fill: none;
+
+    stroke: currentColor;
+
+    stroke-width: 1.7;
+
+    stroke-linecap: round;
+
+    stroke-linejoin: round;
+
+}
+
+
+/* =====================================================
+   OJO
+===================================================== */
+
+.password-toggle {
+
+    position: absolute;
+
+    right: 15px;
+
+    top: 50%;
+
+    width: 34px;
+
+    height: 34px;
+
+    padding: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    transform: translateY(-50%);
+
+    border: none;
+
+    background: transparent;
+
+    color: #334155;
+
+    cursor: pointer;
+
+}
+
+
+.password-toggle:hover {
+
+    background: transparent;
+
+    transform: translateY(-50%);
+
+}
+
+
+.password-toggle svg {
+
+    width: 21px;
+
+    height: 21px;
+
+    fill: none;
+
+    stroke: currentColor;
+
+    stroke-width: 1.7;
+
+    stroke-linecap: round;
+
+    stroke-linejoin: round;
+
+}
+
+
+/* =====================================================
+   BOTÓN
+===================================================== */
+
+.register-button {
+
+    width: 100%;
+
+    height: 58px;
+
+    margin-top: 3px;
+
+    border: 1px solid rgba(255, 255, 255, 0.45);
+
+    border-radius: 13px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #2563EB 0%,
+            #1456E8 100%
+        );
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+
+    box-shadow:
+        0 0 0 1px rgba(59, 130, 246, 0.20),
+        0 0 15px rgba(37, 99, 235, 0.52),
+        0 8px 25px rgba(37, 99, 235, 0.30);
+
+}
+
+
+.register-button:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 0 0 1px rgba(96, 165, 250, 0.45),
+        0 0 25px rgba(37, 99, 235, 0.70),
+        0 10px 30px rgba(37, 99, 235, 0.35);
+
+}
+
+
+/* =====================================================
+   LOGIN
+===================================================== */
+
+.login-link {
+
+    margin: 24px 0 0;
+
+    text-align: center;
+
+    color: #64748B;
+
+    font-size: 14px;
+
+}
+
+
+.login-link a {
+
+    color: #2563EB;
+
+    text-decoration: none;
+
+    font-weight: 600;
+
+}
+
+
+.login-link a:hover {
+
+    text-decoration: underline;
+
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 950px) {
+
+    .register-card {
+
+        width: min(800px, calc(100vw - 40px));
+
+    }
+
+    .register-left {
+
+        padding: 45px;
+
+    }
+
+    .register-right {
+
+        padding: 40px;
+
+    }
+
+    .evolut-symbol {
+
+        width: 155px;
+
+        height: 155px;
+
+    }
+
+    .symbol-bar {
+
+        width: 73px;
+
+        height: 20px;
+
+    }
+
+    .brand h1 {
+
+        font-size: 36px;
+
+    }
+
+}
+
+
+@media (max-width: 760px) {
+
+    .register-page {
+
+        padding: 20px;
+
+    }
+
+    .register-card {
+
+        flex-direction: column;
+
+        width: 100%;
+
+    }
+
+    .register-left,
+    .register-right {
+
+        width: 100%;
+
+    }
+
+    .register-left {
+
+        min-height: 470px;
+
+    }
+
+    .register-right {
+
+        padding: 45px 35px;
+
+    }
+
+}
+
+
+@media (max-width: 480px) {
+
+    .register-page {
+
+        padding: 10px;
+
+    }
+
+    .register-left {
+
+        padding: 35px 25px;
+
+        min-height: 440px;
+
+    }
+
+    .register-right {
+
+        padding: 40px 25px;
+
+    }
+
+    .form-container h2 {
+
+        font-size: 29px;
+
+    }
+
+    .brand h1 {
+
+        font-size: 32px;
+
+        letter-spacing: 6px;
+
+    }
+
+}
