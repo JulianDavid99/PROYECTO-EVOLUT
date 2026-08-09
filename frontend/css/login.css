@@ -1,345 +1,930 @@
 @import url("variables.css");
 
-body{
 
-    margin:0;
+/* =====================================================
+   PÁGINA
+===================================================== */
 
-    min-height:100vh;
+body {
 
-    background:linear-gradient(135deg,#0F172A 0%,#172554 100%);
+    margin: 0;
 
-    font-family:var(--font-family);
+    min-height: 100vh;
 
-}
+    background:
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(20, 65, 150, 0.20),
+            transparent 48%
+        ),
+        linear-gradient(
+            135deg,
+            #020617 0%,
+            #081431 45%,
+            #111D45 100%
+        );
 
-.login-page{
-
-    min-height:100vh;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    padding:40px;
-
-}
-
-.login-card{
-
-    width:1100px;
-
-    min-height:650px;
-
-    display:flex;
-
-    background:white;
-
-    border-radius:24px;
-
-    overflow:hidden;
-
-    box-shadow:0 30px 80px rgba(0,0,0,.25);
+    font-family: var(--font-family);
 
 }
 
-/*======================================
-    PANEL IZQUIERDO
-======================================*/
 
-.login-left{
+/* =====================================================
+   CONTENEDOR
+===================================================== */
 
-    width:40%;
+.login-page {
 
-    background:linear-gradient(180deg,#1E3A8A,#0F172A);
+    min-height: 100vh;
 
-    color:white;
+    display: flex;
 
-    display:flex;
+    justify-content: center;
 
-    flex-direction:column;
+    align-items: center;
 
-    justify-content:space-between;
+    padding: 30px;
 
-    padding:60px;
-
-    position:relative;
+    box-sizing: border-box;
 
 }
 
-.login-left::before{
 
-    content:"";
+/* =====================================================
+   TARJETA
+===================================================== */
 
-    position:absolute;
+.login-card {
 
-    width:350px;
+    width: min(1130px, calc(100vw - 60px));
 
-    height:350px;
+    min-height: 720px;
 
-    border-radius:50%;
+    display: flex;
 
-    background:rgba(255,255,255,.05);
+    overflow: hidden;
 
-    top:-120px;
+    position: relative;
 
-    left:-120px;
+    border-radius: 28px;
 
-}
+    background: white;
 
-.login-left::after{
+    border: 1px solid #3B82F6;
 
-    content:"";
-
-    position:absolute;
-
-    width:250px;
-
-    height:250px;
-
-    border-radius:50%;
-
-    background:rgba(59,130,246,.15);
-
-    bottom:-80px;
-
-    right:-80px;
+    box-shadow:
+        0 0 7px rgba(37, 99, 235, 0.95),
+        0 0 22px rgba(37, 99, 235, 0.65),
+        0 0 45px rgba(37, 99, 235, 0.25),
+        0 30px 80px rgba(0, 0, 0, 0.50);
 
 }
 
-.brand{
 
-    position:relative;
+/* =====================================================
+   PANEL IZQUIERDO
+===================================================== */
 
-    z-index:2;
+.login-left {
 
-}
+    width: 43%;
 
-.logo{
+    box-sizing: border-box;
 
-    width:80px;
+    position: relative;
 
-    height:80px;
+    overflow: hidden;
 
-    border-radius:20px;
+    display: flex;
 
-    background:rgba(255,255,255,.12);
+    flex-direction: column;
 
-    display:flex;
+    justify-content: space-between;
 
-    justify-content:center;
+    padding: 58px 58px 52px;
 
-    align-items:center;
+    color: white;
 
-    font-size:38px;
-
-    margin-bottom:35px;
-
-    backdrop-filter:blur(12px);
-
-}
-
-.brand h1{
-
-    font-size:42px;
-
-    letter-spacing:8px;
-
-    margin-bottom:25px;
-
-}
-
-.tagline{
-
-    color:#D6E4FF;
-
-    line-height:2;
-
-    font-size:18px;
+    background:
+        radial-gradient(
+            circle at 92% 100%,
+            rgba(0, 74, 255, 0.62),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 0% 0%,
+            rgba(43, 105, 255, 0.34),
+            transparent 30%
+        ),
+        linear-gradient(
+            145deg,
+            #0B1D4D 0%,
+            #071333 27%,
+            #02091F 68%,
+            #010619 100%
+        );
 
 }
 
-.reflection{
 
-    position:relative;
+/* =====================================================
+   BRILLOS
+===================================================== */
 
-    z-index:2;
+.login-left::before {
 
-}
+    content: "";
 
-.reflection p{
+    position: absolute;
 
-    color:#E5E7EB;
+    width: 430px;
 
-    line-height:1.8;
+    height: 430px;
 
-    margin-bottom:30px;
+    left: -235px;
 
-    font-size:17px;
+    top: -225px;
 
-}
+    border-radius: 50%;
 
-.dots{
+    background:
+        radial-gradient(
+            circle,
+            rgba(46, 110, 255, 0.25),
+            transparent 68%
+        );
 
-    display:flex;
-
-    gap:10px;
-
-}
-
-.dots span{
-
-    width:10px;
-
-    height:10px;
-
-    border-radius:50%;
-
-    background:rgba(255,255,255,.25);
+    pointer-events: none;
 
 }
 
-.dots .active{
 
-    background:white;
+.login-left::after {
 
-}
+    content: "";
 
-/*======================================
-    PANEL DERECHO
-======================================*/
+    position: absolute;
 
-.login-right{
+    width: 430px;
 
-    width:60%;
+    height: 430px;
 
-    display:flex;
+    right: -220px;
 
-    justify-content:center;
+    bottom: -260px;
 
-    align-items:center;
+    border-radius: 50%;
 
-    padding:60px;
+    background:
+        radial-gradient(
+            circle,
+            rgba(0, 80, 255, 0.55),
+            transparent 68%
+        );
 
-}
-
-.form-container{
-
-    width:100%;
-
-    max-width:420px;
+    pointer-events: none;
 
 }
 
-.form-container h2{
 
-    font-size:34px;
+/* =====================================================
+   MARCA
+===================================================== */
 
-    margin-bottom:10px;
+.brand {
 
-    color:#111827;
+    position: relative;
 
-}
-
-.subtitle{
-
-    color:#6B7280;
-
-    margin-bottom:40px;
+    z-index: 2;
 
 }
 
-form{
 
-    display:flex;
+/* =====================================================
+   SÍMBOLO
+===================================================== */
 
-    flex-direction:column;
+.evolut-symbol {
 
-}
+    width: 200px;
 
-label{
+    height: 200px;
 
-    margin-bottom:8px;
+    border-radius: 34px;
 
-    font-weight:600;
+    position: relative;
 
-    color:#374151;
+    display: flex;
 
-}
+    flex-direction: column;
 
-input{
+    align-items: center;
 
-    height:52px;
+    justify-content: center;
 
-    padding:0 18px;
+    gap: 18px;
 
-    border:1px solid #D1D5DB;
+    margin-bottom: 28px;
 
-    border-radius:12px;
+    background:
+        radial-gradient(
+            circle at 50% 35%,
+            rgba(24, 63, 135, 0.25),
+            transparent 60%
+        ),
+        #02091F;
 
-    margin-bottom:24px;
+    border: 2px solid rgba(37, 115, 255, 0.95);
 
-    font-size:15px;
-
-    transition:.25s;
-
-}
-
-input:focus{
-
-    border-color:#2563EB;
-
-    box-shadow:0 0 0 4px rgba(37,99,235,.15);
-
-}
-
-button{
-
-    height:54px;
-
-    border:none;
-
-    border-radius:12px;
-
-    background:#2563EB;
-
-    color:white;
-
-    font-size:16px;
-
-    font-weight:600;
-
-    cursor:pointer;
-
-    transition:.25s;
+    box-shadow:
+        0 0 7px rgba(37, 115, 255, 0.95),
+        0 0 18px rgba(37, 115, 255, 0.70),
+        0 0 35px rgba(37, 115, 255, 0.35),
+        inset 0 0 28px rgba(21, 71, 170, 0.20);
 
 }
 
-button:hover{
 
-    background:#1D4ED8;
+.symbol-bar {
 
-    transform:translateY(-2px);
+    width: 95px;
 
-}
+    height: 25px;
 
-.register{
+    border-radius: 7px;
 
-    margin-top:35px;
-
-    text-align:center;
-
-    color:#6B7280;
+    transform: skewX(-18deg);
 
 }
 
-.register a{
 
-    color:#2563EB;
+.symbol-top {
 
-    text-decoration:none;
+    background:
+        linear-gradient(
+            135deg,
+            #2388FF 0%,
+            #0057FF 100%
+        );
 
-    font-weight:600;
+    box-shadow:
+        0 0 8px rgba(25, 117, 255, 0.95),
+        0 0 20px rgba(25, 117, 255, 0.50);
+
+}
+
+
+.symbol-middle {
+
+    background:
+        linear-gradient(
+            135deg,
+            #FFFFFF 0%,
+            #E7EAF0 100%
+        );
+
+    box-shadow:
+        0 0 8px rgba(255, 255, 255, 0.55);
+
+}
+
+
+.symbol-bottom {
+
+    background:
+        linear-gradient(
+            135deg,
+            #2388FF 0%,
+            #0057FF 100%
+        );
+
+    box-shadow:
+        0 0 8px rgba(25, 117, 255, 0.95),
+        0 0 20px rgba(25, 117, 255, 0.50);
+
+}
+
+
+/* =====================================================
+   EVOLUT
+===================================================== */
+
+.brand h1 {
+
+    margin: 0 0 30px;
+
+    color: white;
+
+    font-size: 45px;
+
+    line-height: 1;
+
+    font-weight: 600;
+
+    letter-spacing: 9px;
+
+}
+
+
+/* =====================================================
+   TAGLINE
+===================================================== */
+
+.tagline {
+
+    margin: 0;
+
+    color: #F2F6FF;
+
+    font-size: 19px;
+
+    line-height: 2;
+
+}
+
+
+/* =====================================================
+   REFLEXIONES
+===================================================== */
+
+.reflection {
+
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 370px;
+
+}
+
+
+.reflection p {
+
+    min-height: 62px;
+
+    margin: 0 0 28px;
+
+    color: #F4F7FF;
+
+    font-size: 16px;
+
+    line-height: 1.7;
+
+    transition: opacity 0.18s ease;
+
+}
+
+
+/* =====================================================
+   PUNTOS
+===================================================== */
+
+.dots {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+}
+
+
+.dot {
+
+    width: 10px;
+
+    height: 10px;
+
+    padding: 0;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.25);
+
+    cursor: pointer;
+
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease,
+        box-shadow 0.25s ease;
+
+}
+
+
+.dot:hover {
+
+    transform: scale(1.15);
+
+    background: rgba(255, 255, 255, 0.65);
+
+}
+
+
+.dot.active {
+
+    background: white;
+
+    transform: scale(1.15);
+
+    box-shadow:
+        0 0 7px rgba(255, 255, 255, 0.85),
+        0 0 15px rgba(59, 130, 246, 0.75);
+
+}
+
+
+/* =====================================================
+   PANEL DERECHO
+===================================================== */
+
+.login-right {
+
+    width: 57%;
+
+    box-sizing: border-box;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 65px 78px;
+
+    background: white;
+
+}
+
+
+.form-container {
+
+    width: 100%;
+
+    max-width: 500px;
+
+}
+
+
+.form-container h2 {
+
+    margin: 0 0 12px;
+
+    color: #0F172A;
+
+    font-size: 37px;
+
+    line-height: 1.2;
+
+    font-weight: 700;
+
+}
+
+
+.subtitle {
+
+    margin: 0 0 48px;
+
+    color: #64748B;
+
+    font-size: 16px;
+
+}
+
+
+/* =====================================================
+   FORMULARIO
+===================================================== */
+
+form {
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+
+label {
+
+    margin-bottom: 9px;
+
+    color: #1E293B;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+}
+
+
+/* =====================================================
+   INPUTS
+===================================================== */
+
+.input-wrapper {
+
+    width: 100%;
+
+    position: relative;
+
+    margin-bottom: 27px;
+
+}
+
+
+.input-wrapper input {
+
+    width: 100%;
+
+    height: 62px;
+
+    box-sizing: border-box;
+
+    padding: 0 55px;
+
+    border: 1px solid #C7D5EF;
+
+    border-radius: 13px;
+
+    outline: none;
+
+    background: #FFFFFF;
+
+    color: #111827;
+
+    font-family: inherit;
+
+    font-size: 15px;
+
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease;
+
+}
+
+
+.input-wrapper input::placeholder {
+
+    color: #9AAACC;
+
+}
+
+
+.input-wrapper input:focus {
+
+    border-color: #69A5FF;
+
+    background: white;
+
+    box-shadow:
+        0 0 0 3px rgba(59, 130, 246, 0.08),
+        0 0 16px rgba(59, 130, 246, 0.32),
+        0 7px 22px rgba(37, 99, 235, 0.10);
+
+}
+
+
+/* =====================================================
+   ICONOS
+===================================================== */
+
+.input-icon {
+
+    position: absolute;
+
+    left: 19px;
+
+    top: 50%;
+
+    width: 22px;
+
+    height: 22px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    transform: translateY(-50%);
+
+    color: #334155;
+
+    pointer-events: none;
+
+    z-index: 2;
+
+}
+
+
+.input-icon svg {
+
+    width: 21px;
+
+    height: 21px;
+
+    fill: none;
+
+    stroke: currentColor;
+
+    stroke-width: 1.7;
+
+    stroke-linecap: round;
+
+    stroke-linejoin: round;
+
+}
+
+
+/* =====================================================
+   MOSTRAR CONTRASEÑA
+===================================================== */
+
+.password-toggle {
+
+    position: absolute;
+
+    right: 15px;
+
+    top: 50%;
+
+    width: 34px;
+
+    height: 34px;
+
+    padding: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    transform: translateY(-50%);
+
+    border: none;
+
+    background: transparent;
+
+    color: #334155;
+
+    cursor: pointer;
+
+}
+
+
+.password-toggle:hover {
+
+    background: transparent;
+
+    transform: translateY(-50%);
+
+}
+
+
+.password-toggle svg {
+
+    width: 21px;
+
+    height: 21px;
+
+    fill: none;
+
+    stroke: currentColor;
+
+    stroke-width: 1.7;
+
+    stroke-linecap: round;
+
+    stroke-linejoin: round;
+
+}
+
+
+/* =====================================================
+   BOTÓN
+===================================================== */
+
+.login-button {
+
+    width: 100%;
+
+    height: 62px;
+
+    margin-top: 3px;
+
+    border: 1px solid rgba(255, 255, 255, 0.45);
+
+    border-radius: 13px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #2563EB 0%,
+            #1456E8 100%
+        );
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 17px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+
+    box-shadow:
+        0 0 0 1px rgba(59, 130, 246, 0.20),
+        0 0 15px rgba(37, 99, 235, 0.52),
+        0 8px 25px rgba(37, 99, 235, 0.30);
+
+}
+
+
+.login-button:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 0 0 1px rgba(96, 165, 250, 0.45),
+        0 0 25px rgba(37, 99, 235, 0.70),
+        0 10px 30px rgba(37, 99, 235, 0.35);
+
+}
+
+
+.login-button:active {
+
+    transform: translateY(0);
+
+}
+
+
+/* =====================================================
+   REGISTRO
+===================================================== */
+
+.register {
+
+    margin: 35px 0 0;
+
+    text-align: center;
+
+    color: #64748B;
+
+    font-size: 15px;
+
+}
+
+
+.register a {
+
+    color: #2563EB;
+
+    text-decoration: none;
+
+    font-weight: 600;
+
+}
+
+
+.register a:hover {
+
+    text-decoration: underline;
+
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 950px) {
+
+    .login-card {
+
+        width: min(800px, calc(100vw - 40px));
+
+    }
+
+    .login-left {
+
+        padding: 45px;
+
+    }
+
+    .login-right {
+
+        padding: 50px;
+
+    }
+
+    .evolut-symbol {
+
+        width: 165px;
+
+        height: 165px;
+
+    }
+
+    .symbol-bar {
+
+        width: 78px;
+
+        height: 21px;
+
+    }
+
+    .brand h1 {
+
+        font-size: 38px;
+
+    }
+
+}
+
+
+@media (max-width: 760px) {
+
+    .login-page {
+
+        padding: 20px;
+
+    }
+
+    .login-card {
+
+        flex-direction: column;
+
+        width: 100%;
+
+    }
+
+    .login-left,
+    .login-right {
+
+        width: 100%;
+
+    }
+
+    .login-left {
+
+        min-height: 500px;
+
+    }
+
+    .login-right {
+
+        padding: 50px 35px;
+
+    }
+
+}
+
+
+@media (max-width: 480px) {
+
+    .login-page {
+
+        padding: 10px;
+
+    }
+
+    .login-left {
+
+        padding: 35px 25px;
+
+        min-height: 470px;
+
+    }
+
+    .login-right {
+
+        padding: 40px 25px;
+
+    }
+
+    .form-container h2 {
+
+        font-size: 30px;
+
+    }
+
+    .brand h1 {
+
+        font-size: 34px;
+
+        letter-spacing: 7px;
+
+    }
 
 }

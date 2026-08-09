@@ -27,45 +27,78 @@
 
                 <div class="brand">
 
-                    <div class="logo">
+                    <div class="evolut-symbol">
 
-                        ▲
+                        <div class="symbol-bar symbol-top"></div>
+
+                        <div class="symbol-bar symbol-middle"></div>
+
+                        <div class="symbol-bar symbol-bottom"></div>
 
                     </div>
 
                     <h1>EVOLUT</h1>
 
                     <p class="tagline">
-
                         Piensa mejor.<br>
                         Decide mejor.<br>
                         Evoluciona.
-
                     </p>
 
                 </div>
 
+
+                <!-- FRASES -->
+
                 <div class="reflection">
 
-                    <p>
-
+                    <p id="reflectionText">
                         "Las mejores decisiones empiezan comprendiendo el problema."
-
                     </p>
 
                     <div class="dots">
 
-                        <span class="active"></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
+                        <button
+                            type="button"
+                            class="dot active"
+                            data-index="0"
+                            aria-label="Frase 1">
+                        </button>
+
+                        <button
+                            type="button"
+                            class="dot"
+                            data-index="1"
+                            aria-label="Frase 2">
+                        </button>
+
+                        <button
+                            type="button"
+                            class="dot"
+                            data-index="2"
+                            aria-label="Frase 3">
+                        </button>
+
+                        <button
+                            type="button"
+                            class="dot"
+                            data-index="3"
+                            aria-label="Frase 4">
+                        </button>
+
+                        <button
+                            type="button"
+                            class="dot"
+                            data-index="4"
+                            aria-label="Frase 5">
+                        </button>
 
                     </div>
 
                 </div>
 
             </div>
+
 
             <!-- PANEL DERECHO -->
 
@@ -74,45 +107,129 @@
                 <div class="form-container">
 
                     <h2>
-
                         Bienvenido de nuevo
-
                     </h2>
 
                     <p class="subtitle">
-
                         Accede a tu espacio de crecimiento.
-
                     </p>
+
 
                     <form id="loginForm">
 
-                        <label>
+                        <!-- CORREO -->
 
+                        <label for="correo">
                             Correo electrónico
-
                         </label>
 
-                        <input
-                            id="correo"
-                            type="email"
-                            placeholder="correo@ejemplo.com"
-                            required>
+                        <div class="input-wrapper">
 
-                        <label>
+                            <span class="input-icon">
 
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    aria-hidden="true">
+
+                                    <circle
+                                        cx="12"
+                                        cy="8"
+                                        r="4">
+                                    </circle>
+
+                                    <path
+                                        d="M4 21c0-4 3.5-6 8-6s8 2 8 6">
+                                    </path>
+
+                                </svg>
+
+                            </span>
+
+                            <input
+                                id="correo"
+                                type="email"
+                                placeholder="Escribe tu correo electrónico"
+                                autocomplete="email"
+                                required>
+
+                        </div>
+
+
+                        <!-- CONTRASEÑA -->
+
+                        <label for="contrasena">
                             Contraseña
-
                         </label>
 
-                        <input
-                            id="contrasena"
-                            type="password"
-                            placeholder="••••••••"
-                            required>
+                        <div class="input-wrapper">
+
+                            <span class="input-icon">
+
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    aria-hidden="true">
+
+                                    <rect
+                                        x="5"
+                                        y="10"
+                                        width="14"
+                                        height="11"
+                                        rx="2">
+                                    </rect>
+
+                                    <path
+                                        d="M8 10V7a4 4 0 0 1 8 0v3">
+                                    </path>
+
+                                    <circle
+                                        cx="12"
+                                        cy="15.5"
+                                        r="1">
+                                    </circle>
+
+                                </svg>
+
+                            </span>
+
+                            <input
+                                id="contrasena"
+                                type="password"
+                                placeholder="Escribe tu contraseña"
+                                autocomplete="current-password"
+                                required>
+
+                            <button
+                                type="button"
+                                id="togglePassword"
+                                class="password-toggle"
+                                aria-label="Mostrar contraseña">
+
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    aria-hidden="true">
+
+                                    <path
+                                        d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z">
+                                    </path>
+
+                                    <circle
+                                        cx="12"
+                                        cy="12"
+                                        r="3">
+                                    </circle>
+
+                                </svg>
+
+                            </button>
+
+                        </div>
+
+
+                        <!-- BOTÓN -->
 
                         <button
-                            type="submit">
+                            type="submit"
+                            class="login-button">
 
                             Iniciar sesión
 
@@ -120,14 +237,13 @@
 
                     </form>
 
+
                     <p class="register">
 
                         ¿No tienes cuenta?
 
                         <a href="register.html">
-
                             Crear cuenta →
-
                         </a>
 
                     </p>
@@ -140,9 +256,9 @@
 
     </main>
 
-<script src="../js/api.js"></script>
-<script src="../js/auth.js"></script>
-<script src="../js/login.js"></script>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/login.js"></script>
 
 </body>
 
