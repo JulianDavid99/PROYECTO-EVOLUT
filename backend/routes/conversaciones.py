@@ -1,20 +1,41 @@
 from flask import Blueprint, request
 from db import obtener_conexion
 
-conversaciones = Blueprint("conversaciones", __name__)
 
+conversaciones = Blueprint(
+    "conversaciones",
+    __name__
+)
+
+
+# =========================================================
+# OBTENER CONVERSACIONES DEL USUARIO
+# =========================================================
 
 @conversaciones.route("/", methods=["GET"])
 def obtener_conversaciones():
+
+    usuario_id = request.args.get("usuario_id")
+
+    if not usuario_id:
+        return {
+            "mensaje": "El usuario es obligatorio"
+        }, 400
 
     conexion = obtener_conexion()
     cursor = conexion.cursor()
 
     cursor.execute("""
-        SELECT *
+        SELECT
+            id,
+            titulo,
+            fecha_creacion,
+            usuario_id,
+            categoria_id
         FROM conversaciones
+        WHERE usuario_id = %s
         ORDER BY id DESC
-    """)
+    """, (usuario_id,))
 
     conversaciones_db = cursor.fetchall()
 
@@ -36,6 +57,10 @@ def obtener_conversaciones():
     return resultado, 200
 
 
+# =========================================================
+# CREAR CONVERSACIÓN
+# =========================================================
+
 @conversaciones.route("/", methods=["POST"])
 def crear_conversacion():
 
@@ -53,8 +78,13 @@ def crear_conversacion():
     conexion = obtener_conexion()
     cursor = conexion.cursor()
 
+    # Verificar usuario
     cursor.execute(
-        "SELECT * FROM usuarios WHERE id = %s",
+        """
+        SELECT id
+        FROM usuarios
+        WHERE id = %s
+        """,
         (usuario_id,)
     )
 
@@ -69,8 +99,13 @@ def crear_conversacion():
             "mensaje": "El usuario no existe"
         }, 404
 
+    # Verificar categoría
     cursor.execute(
-        "SELECT * FROM categorias WHERE id = %s",
+        """
+        SELECT id
+        FROM categorias
+        WHERE id = %s
+        """,
         (categoria_id,)
     )
 
@@ -85,16 +120,29 @@ def crear_conversacion():
             "mensaje": "La categoría no existe"
         }, 404
 
-    cursor.execute("""
+    # Crear conversación
+    cursor.execute(
+        """
         INSERT INTO conversaciones
-        (titulo, usuario_id, categoria_id)
-        VALUES (%s, %s, %s)
+        (
+            titulo,
+            usuario_id,
+            categoria_id
+        )
+        VALUES
+        (
+            %s,
+            %s,
+            %s
+        )
         RETURNING id
-    """, (
-        titulo,
-        usuario_id,
-        categoria_id
-    ))
+        """,
+        (
+            titulo,
+            usuario_id,
+            categoria_id
+        )
+    )
 
     conversacion_id = cursor.fetchone()[0]
 
@@ -112,25 +160,39 @@ def crear_conversacion():
     }, 201
 
 
+# =========================================================
+# ACTUALIZAR CONVERSACIÓN
+# =========================================================
+
 @conversaciones.route("/<int:id>", methods=["PUT"])
 def actualizar_conversacion(id):
 
     datos = request.get_json()
 
     titulo = datos.get("titulo")
+    usuario_id = datos.get("usuario_id")
 
-    if not titulo:
-
+    if not titulo or not usuario_id:
         return {
-            "mensaje": "El título es obligatorio"
+            "mensaje": "El título y el usuario son obligatorios"
         }, 400
 
     conexion = obtener_conexion()
     cursor = conexion.cursor()
 
+    # Verificar que la conversación pertenezca
+    # al usuario que está realizando la acción
     cursor.execute(
-        "SELECT * FROM conversaciones WHERE id = %s",
-        (id,)
+        """
+        SELECT id
+        FROM conversaciones
+        WHERE id = %s
+        AND usuario_id = %s
+        """,
+        (
+            id,
+            usuario_id
+        )
     )
 
     conversacion = cursor.fetchone()
@@ -141,17 +203,23 @@ def actualizar_conversacion(id):
         conexion.close()
 
         return {
-            "mensaje": "La conversación no existe"
-        }, 404
+            "mensaje": "No tienes permiso para modificar esta conversación"
+        }, 403
 
-    cursor.execute("""
+    # Actualizar
+    cursor.execute(
+        """
         UPDATE conversaciones
         SET titulo = %s
         WHERE id = %s
-    """, (
-        titulo,
-        id
-    ))
+        AND usuario_id = %s
+        """,
+        (
+            titulo,
+            id,
+            usuario_id
+        )
+    )
 
     conexion.commit()
 
@@ -163,38 +231,97 @@ def actualizar_conversacion(id):
     }, 200
 
 
+# =========================================================
+# ELIMINAR CONVERSACIÓN
+# =========================================================
+
+# =========================================================
+# ELIMINAR CONVERSACIÓN
+# =========================================================
+
 @conversaciones.route("/<int:id>", methods=["DELETE"])
 def eliminar_conversacion(id):
+
+    datos = request.get_json(silent=True) or {}
+
+    usuario_id = datos.get("usuario_id")
+
+    if not usuario_id:
+        return {
+            "mensaje": "El usuario es obligatorio"
+        }, 400
 
     conexion = obtener_conexion()
     cursor = conexion.cursor()
 
-    cursor.execute(
-        "SELECT * FROM conversaciones WHERE id = %s",
-        (id,)
-    )
+    try:
 
-    conversacion = cursor.fetchone()
+        # Verificar que la conversación exista
+        # y pertenezca al usuario
+        cursor.execute(
+            """
+            SELECT id
+            FROM conversaciones
+            WHERE id = %s
+            AND usuario_id = %s
+            """,
+            (
+                id,
+                usuario_id
+            )
+        )
 
-    if not conversacion:
+        conversacion = cursor.fetchone()
+
+        if not conversacion:
+
+            return {
+                "mensaje": "No tienes permiso para eliminar esta conversación"
+            }, 403
+
+        # =================================================
+        # ELIMINAR TODOS LOS MENSAJES DE LA CONVERSACIÓN
+        # =================================================
+
+        cursor.execute(
+            """
+            DELETE FROM mensajes
+            WHERE conversacion_id = %s
+            """,
+            (
+                id,
+            )
+        )
+
+        # =================================================
+        # ELIMINAR LA CONVERSACIÓN
+        # =================================================
+
+        cursor.execute(
+            """
+            DELETE FROM conversaciones
+            WHERE id = %s
+            AND usuario_id = %s
+            """,
+            (
+                id,
+                usuario_id
+            )
+        )
+
+        conexion.commit()
+
+        return {
+            "mensaje": "Conversación eliminada correctamente"
+        }, 200
+
+    except Exception:
+
+        conexion.rollback()
+
+        raise
+
+    finally:
 
         cursor.close()
         conexion.close()
-
-        return {
-            "mensaje": "La conversación no existe"
-        }, 404
-
-    cursor.execute(
-        "DELETE FROM conversaciones WHERE id = %s",
-        (id,)
-    )
-
-    conexion.commit()
-
-    cursor.close()
-    conexion.close()
-
-    return {
-        "mensaje": "Conversación eliminada correctamente"
-    }, 200
