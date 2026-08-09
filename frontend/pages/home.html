@@ -5,8 +5,9 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
     <title>Evolut</title>
 
@@ -16,146 +17,454 @@
 
 </head>
 
+
 <body>
 
-<div class="layout">
+    <div class="layout">
 
-    <!--====================================
-                SIDEBAR
-    =====================================-->
 
-    <aside class="sidebar">
+        <!-- =====================================================
+             SIDEBAR
+        ====================================================== -->
 
-        <div class="sidebar-top">
+        <aside class="sidebar">
 
-            <div class="logo">
 
-                ▲
+            <!-- LÍNEA LUMINOSA LATERAL -->
+
+            <svg
+                class="sidebar-light-line"
+                viewBox="0 0 120 1000"
+                preserveAspectRatio="none"
+                aria-hidden="true">
+
+                <defs>
+
+                    <filter
+                        id="sidebarGlow"
+                        x="-100%"
+                        y="-20%"
+                        width="300%"
+                        height="140%">
+
+                        <feGaussianBlur
+                            stdDeviation="4"
+                            result="blur">
+                        </feGaussianBlur>
+
+                        <feMerge>
+
+                            <feMergeNode in="blur"></feMergeNode>
+
+                            <feMergeNode in="SourceGraphic"></feMergeNode>
+
+                        </feMerge>
+
+                    </filter>
+
+                </defs>
+
+
+                <path
+                    d="
+                    M 108 0
+                    C 62 65, 38 115, 55 180
+                    C 76 255, 92 300, 58 375
+                    C 23 450, 22 510, 60 585
+                    C 98 660, 95 720, 57 795
+                    C 22 865, 30 930, 78 1000
+                    "
+                    fill="none"
+                    stroke="#1687ff"
+                    stroke-width="2"
+                    filter="url(#sidebarGlow)">
+                </path>
+
+            </svg>
+
+
+            <!-- BRILLO GENERAL DEL SIDEBAR -->
+
+            <div class="sidebar-glow"></div>
+
+
+            <!-- CONTENIDO DEL SIDEBAR -->
+
+            <div class="sidebar-content">
+
+
+                <!-- =================================================
+                     LOGO
+                ================================================== -->
+
+                <div class="home-logo">
+
+                    <svg
+                        class="evolut-logo"
+                        viewBox="0 0 100 100"
+                        aria-label="Evolut">
+
+
+                        <!-- BARRA SUPERIOR -->
+
+                        <rect
+                            class="logo-blue"
+                            x="22"
+                            y="20"
+                            width="52"
+                            height="14"
+                            rx="5"
+                            transform="rotate(-17 48 27)">
+                        </rect>
+
+
+                        <!-- BARRA CENTRAL -->
+
+                        <rect
+                            class="logo-white"
+                            x="22"
+                            y="43"
+                            width="52"
+                            height="14"
+                            rx="5"
+                            transform="rotate(-17 48 50)">
+                        </rect>
+
+
+                        <!-- BARRA INFERIOR -->
+
+                        <rect
+                            class="logo-blue"
+                            x="22"
+                            y="66"
+                            width="52"
+                            height="14"
+                            rx="5"
+                            transform="rotate(-17 48 73)">
+                        </rect>
+
+                    </svg>
+
+
+                    <div class="logo-text">
+                        EVOLUT
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     NUEVA REFLEXIÓN
+                ================================================== -->
+
+                <button
+                    id="btnNueva"
+                    class="new-reflection-btn">
+
+                    <span class="plus">
+                        +
+                    </span>
+
+                    <span>
+                        Nueva reflexión
+                    </span>
+
+                </button>
+
+
+                <!-- =================================================
+                     TÍTULO CONVERSACIONES
+                ================================================== -->
+
+                <div class="conversation-header">
+
+                    <span>
+                        CONVERSACIONES
+                    </span>
+
+                    <div class="conversation-line">
+
+                        <span></span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     LISTA DE CONVERSACIONES
+
+                     home.js seguirá llenando este contenedor
+                ================================================== -->
+
+                <div
+                    id="listaConversaciones"
+                    class="conversation-list">
+
+                </div>
+
 
             </div>
 
-            <h2>
 
-                EVOLUT
+            <!-- =================================================
+                 PERFIL
+            ================================================== -->
 
-            </h2>
+            <div class="sidebar-profile">
 
-            <button id="btnNueva">
+                <a href="profile.html">
 
-                + Nueva reflexión
 
-            </button>
+                    <div class="profile-icon">
 
-            <div class="section-title">
+                        <svg
+                            viewBox="0 0 24 24"
+                            aria-hidden="true">
 
-                Conversaciones
+                            <circle
+                                cx="12"
+                                cy="8"
+                                r="4">
+                            </circle>
+
+                            <path
+                                d="M4 21c0-4 3.5-6 8-6s8 2 8 6">
+                            </path>
+
+                        </svg>
+
+                    </div>
+
+
+                    <span>
+                        Mi perfil
+                    </span>
+
+
+                    <span class="profile-arrow">
+                        ›
+                    </span>
+
+                </a>
 
             </div>
 
-            <div id="listaConversaciones">
 
-            </div>
+        </aside>
 
-        </div>
 
-        <div class="sidebar-footer">
+        <!-- =====================================================
+             CONTENIDO PRINCIPAL
+        ====================================================== -->
 
-            <a href="profile.html">
+        <main class="content">
 
-                Mi perfil
 
-            </a>
+            <!-- =================================================
+                 ENCABEZADO
+            ================================================== -->
 
-        </div>
+            <section class="welcome">
 
-    </aside>
+                <h1>
+                    ¿Sobre qué quieres reflexionar hoy?
+                </h1>
 
-    <!--====================================
-                CONTENIDO
-    =====================================-->
+                <p>
+                    Escribe un pensamiento, una situación o una decisión.
+                    Evolut analizará el contexto y te ayudará a reflexionar.
+                </p>
 
-    <main class="content">
+            </section>
 
-        <div class="welcome">
 
-            <h1>
+            <!-- =================================================
+                 ÁREA DEL CHAT
+            ================================================== -->
 
-                ¿Sobre qué quieres reflexionar hoy?
+            <section
+                id="chatArea"
+                class="chat-area">
 
-            </h1>
 
-            <p>
+                <!-- ESTADO INICIAL -->
 
-                Escribe un pensamiento, una situación o una decisión.
-                Evolut analizará el contexto y te ayudará a reflexionar.
+                <div
+                    id="emptyState"
+                    class="empty-state">
 
-            </p>
 
-        </div>
+                    <!-- ICONO DE CHAT -->
 
-        <div
-            id="chatArea"
-            class="chat-area">
+                    <div class="empty-chat-icon">
 
-        </div>
+                        <svg
+                            viewBox="0 0 64 64"
+                            aria-hidden="true">
 
-        <form id="formMensaje">
+                            <path
+                                d="M10 31c0-11 9-20 22-20s22 9 22 20-9 20-22 20c-4 0-8-1-11-2l-10 5 3-10c-2-4-4-8-4-13z">
+                            </path>
 
-            <textarea
-                id="mensaje"
-                placeholder="Escribe aquí tu reflexión..."
-                rows="3"></textarea>
+                            <circle
+                                cx="23"
+                                cy="31"
+                                r="3">
+                            </circle>
 
-            <button
-                type="submit">
+                            <circle
+                                cx="32"
+                                cy="31"
+                                r="3">
+                            </circle>
 
-                Enviar
+                            <circle
+                                cx="41"
+                                cy="31"
+                                r="3">
+                            </circle>
 
-            </button>
+                        </svg>
 
-        </form>
+                    </div>
 
-    </main>
 
-</div>
+                    <h2>
+                        Inicia tu reflexión
+                    </h2>
 
-<!--====================================
-            MODAL CATEGORÍAS
-=====================================-->
 
-<div id="modalCategoria" class="modal">
+                    <p>
+                        Escribe tu mensaje y comencemos
+                    </p>
 
-    <div class="modal-content">
 
-        <h2>
+                </div>
 
-            Nueva reflexión
 
-        </h2>
+            </section>
 
-        <p>
 
-            Selecciona el área sobre la que deseas reflexionar.
+            <!-- =================================================
+                 FORMULARIO DE MENSAJE
+            ================================================== -->
 
-        </p>
+            <form
+                id="formMensaje"
+                class="message-form">
 
-        <select id="categoriaSelect">
 
-</select>
+                <textarea
+                    id="mensaje"
+                    placeholder="Escribe aquí tu reflexión..."
+                    rows="3"></textarea>
 
-        <button id="btnContinuar">
 
-            Continuar
+                <button
+                    type="submit"
+                    class="send-button">
 
-        </button>
+
+                    <span>
+                        Enviar
+                    </span>
+
+
+                    <!-- ICONO AVIÓN -->
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        aria-hidden="true">
+
+                        <path
+                            d="M3 11.5L21 3l-6.5 18-3.5-7.5L3 11.5z">
+                        </path>
+
+                        <path
+                            d="M11 13.5L21 3">
+                        </path>
+
+                    </svg>
+
+
+                </button>
+
+
+            </form>
+
+
+        </main>
+
 
     </div>
 
-</div>
 
-<script src="../js/api.js"></script>
-<script src="../js/home.js"></script>
-<script src="../js/chat.js"></script>
+    <!-- =========================================================
+         MODAL NUEVA REFLEXIÓN
+    ========================================================== -->
+
+    <div
+        id="modalCategoria"
+        class="modal">
+
+
+        <div class="modal-content">
+
+
+            <!-- CERRAR -->
+
+            <button
+                type="button"
+                class="modal-close"
+                onclick="document.getElementById('modalCategoria').classList.remove('active')">
+
+                ×
+
+            </button>
+
+
+            <h2>
+                Nueva reflexión
+            </h2>
+
+
+            <p>
+                Selecciona el área sobre la que deseas reflexionar.
+            </p>
+
+
+            <select id="categoriaSelect">
+
+                <option value="">
+                    Seleccione una categoría
+                </option>
+
+            </select>
+
+
+            <button
+                id="btnContinuar"
+                class="modal-button">
+
+                Continuar
+
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+
+    <!-- =========================================================
+         JAVASCRIPT
+    ========================================================== -->
+
+    <script src="../js/api.js"></script>
+    <script src="../js/home.js"></script>
+
 
 </body>
 

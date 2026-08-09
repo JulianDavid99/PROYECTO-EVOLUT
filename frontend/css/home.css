@@ -1,445 +1,1411 @@
 @import url("variables.css");
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
 
-body{
+/* =========================================================
+   LAYOUT GENERAL
+========================================================= */
 
-    font-family:var(--font-family);
+body {
 
-    background:#F4F7FB;
+    background:
+        radial-gradient(
+            circle at 80% 10%,
+            rgba(70, 130, 255, .08),
+            transparent 35%
+        ),
+        #F4F7FB;
 
-    height:100vh;
+    min-height: 100vh;
 
-    overflow:hidden;
-
-}
-
-/*======================================
-    LAYOUT
-======================================*/
-
-.layout{
-
-    display:flex;
-
-    height:100vh;
+    overflow: hidden;
 
 }
 
-/*======================================
-    SIDEBAR
-======================================*/
 
-.sidebar{
+.layout {
 
-    width:300px;
+    display: flex;
 
-    background:#0F172A;
+    width: 100%;
 
-    color:white;
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:space-between;
-
-    padding:30px;
+    height: 100vh;
 
 }
 
-.logo{
 
-    width:70px;
+/* =========================================================
+   SIDEBAR
+========================================================= */
 
-    height:70px;
+.sidebar {
 
-    border-radius:18px;
+    position: relative;
 
-    background:#2563EB;
+    width: 335px;
 
-    display:flex;
+    height: 100vh;
 
-    justify-content:center;
+    flex-shrink: 0;
 
-    align-items:center;
+    display: flex;
 
-    font-size:30px;
+    flex-direction: column;
 
-    margin-bottom:25px;
+    justify-content: space-between;
 
-}
+    overflow: hidden;
 
-.sidebar h2{
+    padding: 34px 28px 26px;
 
-    font-size:32px;
+    background:
+        radial-gradient(
+            circle at 20% 100%,
+            rgba(0, 75, 255, .55),
+            transparent 42%
+        ),
+        radial-gradient(
+            circle at 100% 45%,
+            rgba(0, 65, 180, .16),
+            transparent 35%
+        ),
+        linear-gradient(
+            180deg,
+            #020B29 0%,
+            #02091F 55%,
+            #03144B 100%
+        );
 
-    letter-spacing:6px;
+    color: white;
 
-    margin-bottom:35px;
-
-}
-
-#btnNueva{
-
-    width:100%;
-
-    height:50px;
-
-    border:none;
-
-    border-radius:12px;
-
-    background:#2563EB;
-
-    color:white;
-
-    font-size:15px;
-
-    font-weight:600;
-
-    cursor:pointer;
-
-    transition:.2s;
-
-    margin-bottom:35px;
+    box-shadow:
+        8px 0 30px rgba(0, 80, 255, .08);
 
 }
 
-#btnNueva:hover{
 
-    background:#1D4ED8;
+/* =========================================================
+   BRILLO LATERAL
+========================================================= */
 
-}
+.sidebar-glow {
 
-.section-title{
+    position: absolute;
 
-    color:#94A3B8;
+    top: 0;
 
-    margin-bottom:15px;
+    right: -30px;
 
-    font-size:14px;
+    width: 120px;
 
-    text-transform:uppercase;
+    height: 100%;
 
-    letter-spacing:2px;
+    pointer-events: none;
 
-}
+    background:
+        radial-gradient(
+            ellipse at center,
+            rgba(0, 100, 255, .18),
+            transparent 68%
+        );
 
-.conversation{
+    filter: blur(12px);
 
-    padding:14px 16px;
-
-    border-radius:10px;
-
-    cursor:pointer;
-
-    margin-bottom:10px;
-
-    transition:.2s;
+    z-index: 1;
 
 }
 
-.conversation:hover{
 
-    background:#1E293B;
+/* =========================================================
+   LÍNEA CURVA LUMINOSA
+========================================================= */
 
-}
+.sidebar-light-line {
 
-.conversation.active{
+    position: absolute;
 
-    background:#2563EB;
+    top: 0;
 
-}
+    right: -8px;
 
-.sidebar-footer{
+    width: 105px;
 
-    border-top:1px solid rgba(255,255,255,.08);
+    height: 100%;
 
-    padding-top:20px;
+    pointer-events: none;
 
-}
+    overflow: visible;
 
-.sidebar-footer a{
-
-    color:white;
-
-    text-decoration:none;
+    z-index: 3;
 
 }
 
-/*======================================
-    CONTENIDO
-======================================*/
 
-.content{
+/* =========================================================
+   CONTENIDO SIDEBAR
+========================================================= */
 
-    flex:1;
+.sidebar-content {
 
-    display:flex;
+    position: relative;
 
-    flex-direction:column;
+    z-index: 5;
 
-    padding:50px;
+    display: flex;
 
-}
+    flex-direction: column;
 
-.welcome{
-
-    text-align:center;
-
-    margin-bottom:40px;
+    min-height: 0;
 
 }
 
-.welcome h1{
 
-    font-size:38px;
+/* =========================================================
+   LOGO
+========================================================= */
 
-    color:#111827;
+.home-logo {
 
-    margin-bottom:15px;
+    width: 170px;
 
-}
+    margin-left: 5px;
 
-.welcome p{
+    margin-bottom: 28px;
 
-    color:#6B7280;
+    display: flex;
 
-    font-size:18px;
+    flex-direction: column;
 
-}
+    align-items: flex-start;
 
-/*======================================
-    CHAT
-======================================*/
+    position: relative;
 
-.chat-area{
-
-    flex:1;
-
-    background:white;
-
-    border-radius:18px;
-
-    padding:25px;
-
-    overflow-y:auto;
-
-    box-shadow:0 10px 25px rgba(0,0,0,.05);
+    z-index: 10;
 
 }
 
-/*======================================
-    FORMULARIO
-======================================*/
 
-#formMensaje{
+.evolut-logo {
 
-    display:flex;
+    width: 145px;
 
-    gap:20px;
+    height: 125px;
 
-    margin-top:20px;
+    overflow: visible;
 
 }
 
-#mensaje{
 
-    flex:1;
+/* BARRAS AZULES */
 
-    resize:none;
+.evolut-logo .logo-blue {
 
-    border:1px solid #D1D5DB;
+    fill: #1677FF;
 
-    border-radius:14px;
-
-    padding:18px;
-
-    font-size:15px;
-
-    outline:none;
+    filter:
+        drop-shadow(0 0 4px rgba(22, 119, 255, .95))
+        drop-shadow(0 0 10px rgba(22, 119, 255, .8))
+        drop-shadow(0 0 20px rgba(22, 119, 255, .4));
 
 }
 
-#mensaje:focus{
 
-    border-color:#2563EB;
+/* BARRA BLANCA */
 
-}
+.evolut-logo .logo-white {
 
-#formMensaje button{
+    fill: #FFFFFF;
 
-    width:150px;
-
-    border:none;
-
-    border-radius:14px;
-
-    background:#2563EB;
-
-    color:white;
-
-    font-size:16px;
-
-    font-weight:600;
-
-    cursor:pointer;
-
-    transition:.2s;
+    filter:
+        drop-shadow(0 0 4px rgba(255, 255, 255, .95))
+        drop-shadow(0 0 10px rgba(255, 255, 255, .5));
 
 }
 
-#formMensaje button:hover{
 
-    background:#1D4ED8;
+/* TEXTO EVOLUT */
 
-}
+.logo-text {
 
-/*======================================
-    MENSAJES DEL CHAT
-======================================*/
+    margin-top: -8px;
 
-.mensaje{
-    display:flex;
-    margin-bottom:20px;
-    width:100%;
-}
-.mensaje.usuario{
-    justify-content:flex-end;
-}
-.mensaje.ia{
-    justify-content:flex-start;
-}
-.burbuja{
-    max-width:75%;
-    padding:16px 18px;
-    border-radius:18px;
-    line-height:1.6;
-    font-size:15px;
-    white-space:pre-wrap;
-    word-wrap:break-word;
-    box-shadow:0 2px 8px rgba(0,0,0,.08);
-}
-.usuario .burbuja{
-    background:#2563EB;
-    color:white;
-    border-bottom-right-radius:6px;
-}
-.ia .burbuja{
-    background:#F3F4F6;
-    color:#111827;
-    border-bottom-left-radius:6px;
-}
-.chat-area{
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-}
+    margin-left: 31px;
 
-/*======================================
-    MODAL CATEGORÍAS
-======================================*/
+    color: #FFFFFF;
 
-.modal{
+    font-size: 31px;
 
-    position:fixed;
+    font-weight: 700;
 
-    top:0;
-    left:0;
+    letter-spacing: 7px;
 
-    width:100%;
-    height:100%;
+    line-height: 1;
 
-    background:rgba(0,0,0,.45);
-
-    display:none;
-
-    justify-content:center;
-    align-items:center;
-
-    z-index:999;
+    text-shadow:
+        0 0 8px rgba(255,255,255,.12);
 
 }
 
-.modal.active{
 
-    display:flex;
+/* =========================================================
+   BOTÓN NUEVA REFLEXIÓN
+========================================================= */
 
-}
+.new-reflection-btn {
 
-.modal-content{
+    width: 100%;
 
-    width:420px;
+    height: 62px;
 
-    background:white;
+    display: flex;
 
-    border-radius:18px;
+    align-items: center;
 
-    padding:30px;
+    justify-content: center;
 
-    box-shadow:0 20px 50px rgba(0,0,0,.2);
+    gap: 13px;
 
-}
+    margin-bottom: 39px;
 
-.modal-content h2{
+    border-radius: 14px;
 
-    margin-bottom:10px;
+    background:
+        linear-gradient(
+            135deg,
+            #1874FF,
+            #145DE7
+        );
 
-}
+    color: white;
 
-.modal-content p{
+    font-size: 17px;
 
-    margin-bottom:20px;
+    font-weight: 600;
 
-    color:#6B7280;
+    border: 1px solid rgba(104, 181, 255, .95);
 
-}
+    box-shadow:
+        0 0 9px rgba(30, 125, 255, .65),
+        0 0 25px rgba(30, 125, 255, .25);
 
-#categoriaSelect{
-
-    width:100%;
-
-    height:50px;
-
-    border:1px solid #D1D5DB;
-
-    border-radius:10px;
-
-    padding:0 15px;
-
-    margin-bottom:20px;
-
-    font-size:15px;
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        background .2s ease;
 
 }
 
-#btnContinuar{
 
-    width:100%;
+.new-reflection-btn:hover {
 
-    height:50px;
+    transform: translateY(-2px);
 
-    border:none;
+    background:
+        linear-gradient(
+            135deg,
+            #2480FF,
+            #1764F0
+        );
 
-    border-radius:10px;
-
-    background:#2563EB;
-
-    color:white;
-
-    font-size:16px;
-
-    cursor:pointer;
+    box-shadow:
+        0 0 14px rgba(30, 135, 255, .85),
+        0 0 32px rgba(30, 125, 255, .35);
 
 }
 
-#btnContinuar:hover{
 
-    background:#1D4ED8;
+.new-reflection-btn .plus {
+
+    font-size: 29px;
+
+    font-weight: 300;
+
+    line-height: 1;
+
+}
+
+
+/* =========================================================
+   CABECERA CONVERSACIONES
+========================================================= */
+
+.conversation-header {
+
+    display: flex;
+
+    align-items: center;
+
+    width: 100%;
+
+    margin-bottom: 18px;
+
+    color: #42A1FF;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.8px;
+
+}
+
+
+.conversation-line {
+
+    position: relative;
+
+    flex: 1;
+
+    height: 1px;
+
+    margin-left: 13px;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(43, 144, 255, .75),
+            rgba(43, 144, 255, .18)
+        );
+
+}
+
+
+.conversation-line span {
+
+    position: absolute;
+
+    right: -1px;
+
+    top: 50%;
+
+    width: 6px;
+
+    height: 6px;
+
+    transform: translateY(-50%);
+
+    border-radius: 50%;
+
+    background: #36A0FF;
+
+    box-shadow:
+        0 0 5px #1687FF,
+        0 0 12px #1687FF,
+        0 0 22px rgba(22, 135, 255, .9);
+
+}
+
+
+/* =========================================================
+   LISTA DE CONVERSACIONES
+========================================================= */
+
+.conversation-list {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+
+    overflow-y: auto;
+
+    padding-right: 5px;
+
+}
+
+
+.conversation-list::-webkit-scrollbar {
+
+    width: 4px;
+
+}
+
+
+.conversation-list::-webkit-scrollbar-thumb {
+
+    background: rgba(30, 130, 255, .35);
+
+    border-radius: 10px;
+
+}
+
+
+/* =========================================================
+   CONVERSACIÓN
+========================================================= */
+
+.conversation {
+
+    position: relative;
+
+    min-height: 58px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 10px 13px;
+
+    border-radius: 13px;
+
+    color: #FFFFFF;
+
+    font-size: 16px;
+
+    font-weight: 500;
+
+    cursor: pointer;
+
+    transition:
+        background .2s ease,
+        transform .2s ease,
+        box-shadow .2s ease;
+
+}
+
+
+.conversation::before {
+
+    content: "";
+
+    width: 25px;
+
+    height: 21px;
+
+    flex-shrink: 0;
+
+    border: 2px solid #1489FF;
+
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 6px rgba(20, 137, 255, .55);
+
+}
+
+
+.conversation::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 16px;
+
+    top: 39px;
+
+    width: 7px;
+
+    height: 7px;
+
+    border-left: 2px solid #1489FF;
+
+    border-bottom: 2px solid #1489FF;
+
+    transform: skew(-20deg);
+
+}
+
+
+.conversation:hover {
+
+    background: rgba(30, 120, 255, .09);
+
+    transform: translateX(3px);
+
+}
+
+
+.conversation.active {
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(17, 94, 255, .26),
+            rgba(17, 94, 255, .08)
+        );
+
+    box-shadow:
+        inset 0 0 0 1px rgba(30, 135, 255, .95),
+        0 0 15px rgba(0, 110, 255, .18);
+
+}
+
+
+/* =========================================================
+   PERFIL
+========================================================= */
+
+.sidebar-profile {
+
+    position: relative;
+
+    z-index: 6;
+
+    padding-top: 19px;
+
+    border-top:
+        1px solid rgba(87, 154, 255, .22);
+
+}
+
+
+.sidebar-profile a {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    width: 100%;
+
+    min-height: 67px;
+
+    color: white;
+
+    font-size: 17px;
+
+    font-weight: 600;
+
+}
+
+
+.profile-icon {
+
+    width: 49px;
+
+    height: 49px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border: 1px solid #1687FF;
+
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 8px rgba(22, 135, 255, .7),
+        0 0 20px rgba(22, 135, 255, .25);
+
+}
+
+
+.profile-icon svg {
+
+    width: 27px;
+
+    height: 27px;
+
+    fill: none;
+
+    stroke: #1687FF;
+
+    stroke-width: 1.5;
+
+}
+
+
+.profile-arrow {
+
+    margin-left: auto;
+
+    color: white;
+
+    font-size: 36px;
+
+    font-weight: 300;
+
+    line-height: 1;
+
+    text-shadow:
+        0 0 8px rgba(255,255,255,.5);
+
+}
+
+
+/* =========================================================
+   CONTENIDO PRINCIPAL
+========================================================= */
+
+.content {
+
+    flex: 1;
+
+    min-width: 0;
+
+    height: 100vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    padding: 50px 45px 34px;
+
+    background:
+        radial-gradient(
+            circle at 78% 5%,
+            rgba(91, 145, 255, .09),
+            transparent 32%
+        ),
+        radial-gradient(
+            circle at 50% 65%,
+            rgba(255, 255, 255, .95),
+            transparent 48%
+        ),
+        #F4F7FB;
+
+}
+
+
+/* =========================================================
+   WELCOME
+========================================================= */
+
+.welcome {
+
+    flex-shrink: 0;
+
+    text-align: center;
+
+    margin: 0 auto 31px;
+
+    max-width: 900px;
+
+}
+
+
+.welcome h1 {
+
+    margin: 0 0 13px;
+
+    color: #07102D;
+
+    font-size: clamp(30px, 3vw, 43px);
+
+    font-weight: 700;
+
+    line-height: 1.2;
+
+    letter-spacing: -1.2px;
+
+}
+
+
+.welcome p {
+
+    max-width: 790px;
+
+    margin: auto;
+
+    color: #526991;
+
+    font-size: 18px;
+
+    line-height: 1.6;
+
+}
+
+
+/* =========================================================
+   CHAT AREA
+========================================================= */
+
+.chat-area {
+
+    position: relative;
+
+    flex: 1;
+
+    min-height: 0;
+
+    width: 100%;
+
+    overflow-y: auto;
+
+    padding: 30px;
+
+    border: 1px solid rgba(153, 190, 255, .65);
+
+    border-radius: 20px;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(255, 255, 255, .98),
+            rgba(250, 252, 255, .96)
+        );
+
+    box-shadow:
+        inset 0 0 45px rgba(105, 150, 255, .045),
+        0 8px 28px rgba(48, 93, 165, .08);
+
+}
+
+
+.chat-area::-webkit-scrollbar {
+
+    width: 6px;
+
+}
+
+
+.chat-area::-webkit-scrollbar-thumb {
+
+    background: rgba(40, 110, 220, .22);
+
+    border-radius: 10px;
+
+}
+
+
+/* =========================================================
+   ESTADO VACÍO
+========================================================= */
+
+.empty-state {
+
+    position: absolute;
+
+    top: 50%;
+
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    width: 100%;
+
+    text-align: center;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    pointer-events: none;
+
+}
+
+
+.empty-chat-icon {
+
+    margin-bottom: 14px;
+
+}
+
+
+.empty-chat-icon svg {
+
+    width: 90px;
+
+    height: 90px;
+
+    overflow: visible;
+
+    fill: none;
+
+    stroke: #176DFF;
+
+    stroke-width: 2;
+
+    filter:
+        drop-shadow(0 0 5px rgba(22, 109, 255, .65))
+        drop-shadow(0 0 14px rgba(22, 109, 255, .3));
+
+}
+
+
+.empty-chat-icon circle {
+
+    fill: #176DFF;
+
+    stroke: none;
+
+    filter:
+        drop-shadow(0 0 5px rgba(22, 109, 255, .75));
+
+}
+
+
+.empty-state h2 {
+
+    margin: 0 0 5px;
+
+    color: #07102D;
+
+    font-size: 26px;
+
+    font-weight: 700;
+
+}
+
+
+.empty-state p {
+
+    margin: 0;
+
+    color: #536A98;
+
+    font-size: 18px;
+
+}
+
+
+/* =========================================================
+   MENSAJES DEL CHAT
+========================================================= */
+
+.mensaje {
+
+    display: flex;
+
+    width: 100%;
+
+    margin-bottom: 20px;
+
+}
+
+
+.mensaje.usuario {
+
+    justify-content: flex-end;
+
+}
+
+
+.mensaje.ia {
+
+    justify-content: flex-start;
+
+}
+
+
+.burbuja {
+
+    max-width: 75%;
+
+    padding: 15px 18px;
+
+    border-radius: 18px;
+
+    font-size: 15px;
+
+    line-height: 1.6;
+
+    white-space: pre-wrap;
+
+    word-wrap: break-word;
+
+    box-shadow:
+        0 3px 10px rgba(0,0,0,.07);
+
+}
+
+
+.usuario .burbuja {
+
+    background: #176DFF;
+
+    color: white;
+
+    border-bottom-right-radius: 6px;
+
+}
+
+
+.ia .burbuja {
+
+    background: #F0F3F8;
+
+    color: #111827;
+
+    border-bottom-left-radius: 6px;
+
+}
+
+
+/* =========================================================
+   FORMULARIO
+========================================================= */
+
+.message-form {
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: stretch;
+
+    gap: 20px;
+
+    width: 100%;
+
+    margin-top: 21px;
+
+}
+
+
+#mensaje {
+
+    flex: 1;
+
+    min-width: 0;
+
+    min-height: 120px;
+
+    resize: vertical;
+
+    padding: 22px 27px;
+
+    border: 1px solid rgba(147, 186, 255, .7);
+
+    border-radius: 19px;
+
+    background: rgba(255, 255, 255, .92);
+
+    color: #111827;
+
+    font-family: inherit;
+
+    font-size: 18px;
+
+    line-height: 1.5;
+
+    outline: none;
+
+    box-shadow:
+        0 5px 18px rgba(47, 92, 160, .045);
+
+    transition:
+        border .2s ease,
+        box-shadow .2s ease;
+
+}
+
+
+#mensaje::placeholder {
+
+    color: #8AA0C8;
+
+}
+
+
+#mensaje:focus {
+
+    border-color: #3284FF;
+
+    box-shadow:
+        0 0 0 3px rgba(50, 132, 255, .08),
+        0 6px 20px rgba(47, 92, 160, .07);
+
+}
+
+
+/* =========================================================
+   BOTÓN ENVIAR
+========================================================= */
+
+.send-button {
+
+    width: 175px;
+
+    min-width: 175px;
+
+    min-height: 120px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 15px;
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #1874FF,
+            #145EE9
+        );
+
+    color: white;
+
+    border: 1px solid rgba(105, 182, 255, .95);
+
+    font-family: inherit;
+
+    font-size: 18px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 0 12px rgba(28, 120, 255, .58),
+        0 0 28px rgba(28, 120, 255, .24);
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        background .2s ease;
+
+}
+
+
+.send-button:hover {
+
+    transform: translateY(-2px);
+
+    background:
+        linear-gradient(
+            135deg,
+            #2580FF,
+            #1666F1
+        );
+
+    box-shadow:
+        0 0 16px rgba(28, 130, 255, .8),
+        0 0 35px rgba(28, 130, 255, .35);
+
+}
+
+
+.send-button svg {
+
+    width: 29px;
+
+    height: 29px;
+
+    fill: none;
+
+    stroke: white;
+
+    stroke-width: 1.8;
+
+    stroke-linecap: round;
+
+    stroke-linejoin: round;
+
+    filter:
+        drop-shadow(0 0 4px rgba(255,255,255,.55));
+
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.modal {
+
+    position: fixed;
+
+    inset: 0;
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+    background: rgba(1, 10, 35, .55);
+
+    backdrop-filter: blur(5px);
+
+    z-index: 999;
+
+}
+
+
+.modal.active {
+
+    display: flex;
+
+}
+
+
+.modal-content {
+
+    position: relative;
+
+    width: min(430px, 100%);
+
+    padding: 34px;
+
+    border-radius: 20px;
+
+    background: white;
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.25),
+        0 0 30px rgba(30, 120, 255, .12);
+
+}
+
+
+.modal-content h2 {
+
+    margin: 0 0 10px;
+
+    color: #07102D;
+
+    font-size: 25px;
+
+}
+
+
+.modal-content p {
+
+    margin: 0 0 22px;
+
+    color: #657799;
+
+    font-size: 15px;
+
+}
+
+
+.modal-close {
+
+    position: absolute;
+
+    top: 13px;
+
+    right: 16px;
+
+    width: 34px;
+
+    height: 34px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: transparent;
+
+    color: #526991;
+
+    font-size: 25px;
+
+}
+
+
+.modal-close:hover {
+
+    background: #F1F5FA;
+
+}
+
+
+#categoriaSelect {
+
+    width: 100%;
+
+    height: 52px;
+
+    padding: 0 15px;
+
+    margin-bottom: 20px;
+
+    border: 1px solid #D1DDF0;
+
+    border-radius: 11px;
+
+    background: white;
+
+    color: #1B2B4B;
+
+    font-family: inherit;
+
+    font-size: 15px;
+
+    outline: none;
+
+}
+
+
+#categoriaSelect:focus {
+
+    border-color: #287AFF;
+
+    box-shadow:
+        0 0 0 3px rgba(40, 122, 255, .1);
+
+}
+
+
+.modal-button {
+
+    width: 100%;
+
+    height: 52px;
+
+    border-radius: 11px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #1874FF,
+            #145EE9
+        );
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    box-shadow:
+        0 5px 15px rgba(30, 110, 255, .25);
+
+}
+
+
+.modal-button:hover {
+
+    background:
+        linear-gradient(
+            135deg,
+            #2580FF,
+            #1666F1
+        );
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    .sidebar {
+
+        width: 285px;
+
+    }
+
+    .content {
+
+        padding: 35px 25px 25px;
+
+    }
+
+    .welcome h1 {
+
+        font-size: 32px;
+
+    }
+
+    .welcome p {
+
+        font-size: 16px;
+
+    }
+
+    .send-button {
+
+        width: 145px;
+
+        min-width: 145px;
+
+    }
+
+}
+
+
+@media (max-width: 760px) {
+
+    body {
+
+        overflow: auto;
+
+    }
+
+    .layout {
+
+        min-height: 100vh;
+
+        height: auto;
+
+        flex-direction: column;
+
+    }
+
+    .sidebar {
+
+        width: 100%;
+
+        height: auto;
+
+        min-height: 280px;
+
+    }
+
+    .sidebar-light-line {
+
+        display: none;
+
+    }
+
+    .sidebar-content {
+
+        padding-bottom: 20px;
+
+    }
+
+    .sidebar-profile {
+
+        margin-top: 20px;
+
+    }
+
+    .content {
+
+        height: auto;
+
+        min-height: 700px;
+
+    }
+
+    .chat-area {
+
+        min-height: 450px;
+
+    }
+
+    .message-form {
+
+        flex-direction: column;
+
+    }
+
+    .send-button {
+
+        width: 100%;
+
+        min-width: 0;
+
+        min-height: 60px;
+
+    }
 
 }
