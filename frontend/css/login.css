@@ -56,7 +56,7 @@ body {
 
 .login-card {
 
-    width: min(1130px, calc(100vw - 60px));
+    width: min(1050px, calc(100vw - 60px));
 
     min-height: 720px;
 
