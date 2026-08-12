@@ -40,6 +40,16 @@ const chatArea =
         "chatArea"
     );
 
+const categoriaConversacion =
+    document.getElementById(
+        "categoriaConversacion"
+    );
+
+const categoriaConversacionNombre =
+    document.getElementById(
+        "categoriaConversacionNombre"
+    );
+
 
 // ============================================================
 // VARIABLES
@@ -56,6 +66,9 @@ let ultimoMensajeEnviado =
 
 let enviandoMensaje =
     false;
+
+let categoriasDisponibles =
+    {};
 
 
 // ============================================================
@@ -247,6 +260,24 @@ async function cargarCategorias() {
         }
 
 
+        // Guardar las categorías para poder
+        // mostrar el nombre posteriormente.
+
+        categoriasDisponibles =
+            {};
+
+
+        categorias.forEach(
+            categoria => {
+
+                categoriasDisponibles[
+                    categoria.id
+                ] = categoria.nombre;
+
+            }
+        );
+
+
         categoriaSelect.innerHTML = `
 
             <option value="">
@@ -310,22 +341,6 @@ async function cargarConversaciones() {
             return;
         }
 
-
-        /*
-         * IMPORTANTE:
-         *
-         * Antes pedíamos:
-         *
-         * /api/conversaciones/
-         *
-         * Eso devolvía las conversaciones de TODOS.
-         *
-         * Ahora pedimos:
-         *
-         * /api/conversaciones/?usuario_id=ID
-         *
-         * y el backend filtra por ese usuario.
-         */
 
         const respuesta =
             await fetch(
@@ -428,6 +443,14 @@ function confirmarCategoria() {
         );
 
 
+    // Mostrar inmediatamente la categoría
+    // seleccionada en el encabezado del chat.
+
+    mostrarCategoriaConversacion(
+        categoriaSeleccionada
+    );
+
+
     conversacionActual =
         null;
 
@@ -511,6 +534,10 @@ function agregarConversacion(
 
     item.dataset.id =
         conversacion.id;
+
+
+    item.dataset.categoriaId =
+        conversacion.categoria_id;
 
 
     const titulo =
@@ -628,11 +655,16 @@ async function seleccionarConversacion(
 
 
     categoriaSeleccionada =
-        null;
+        elemento.dataset.categoriaId;
 
 
     ultimoMensajeEnviado =
         null;
+
+
+    mostrarCategoriaConversacion(
+        categoriaSeleccionada
+    );
 
 
     await cargarMensajes(
@@ -643,15 +675,66 @@ async function seleccionarConversacion(
 
 
 // ============================================================
+// MOSTRAR CATEGORÍA DE LA CONVERSACIÓN
+// ============================================================
+
+function mostrarCategoriaConversacion(
+    categoriaId
+) {
+
+    if (
+        !categoriaConversacion ||
+        !categoriaConversacionNombre
+    ) {
+
+        return;
+
+    }
+
+
+    const nombre =
+        categoriasDisponibles[
+            categoriaId
+        ];
+
+
+    if (!nombre) {
+
+        categoriaConversacion.hidden =
+            true;
+
+        categoriaConversacionNombre.textContent =
+            "";
+
+        return;
+
+    }
+
+
+    categoriaConversacionNombre.textContent =
+        nombre;
+
+
+    categoriaConversacion.hidden =
+        false;
+
+}
+
+
+// ============================================================
 // CARGAR MENSAJES
 // ============================================================
 
-async function cargarMensajes(conversacionId) {
+async function cargarMensajes(
+    conversacionId
+) {
 
     try {
 
         const usuarioGuardado =
-            localStorage.getItem("usuario");
+            localStorage.getItem(
+                "usuario"
+            );
 
 
         if (!usuarioGuardado) {
@@ -664,10 +747,15 @@ async function cargarMensajes(conversacionId) {
 
 
         const usuario =
-            JSON.parse(usuarioGuardado);
+            JSON.parse(
+                usuarioGuardado
+            );
 
 
-        if (!usuario || !usuario.id) {
+        if (
+            !usuario ||
+            !usuario.id
+        ) {
 
             throw new Error(
                 "La información del usuario no es válida."
@@ -901,6 +989,14 @@ async function enviarMensaje(
 
                 }
             );
+
+
+        // Mantener visible la categoría
+        // después de crear la conversación.
+
+        mostrarCategoriaConversacion(
+            datos.categoria_id
+        );
 
     }
 
@@ -1252,6 +1348,69 @@ function crearEstilosHome() {
 
 
     estilos.textContent = `
+
+        /* =====================================
+           CATEGORÍA DE LA CONVERSACIÓN
+        ===================================== */
+
+        .categoria-conversacion {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                10px;
+
+            margin:
+                0 0 12px;
+
+            padding:
+                0 4px;
+
+        }
+
+
+        .categoria-conversacion[hidden] {
+
+            display:
+                none;
+
+        }
+
+
+        .categoria-label {
+
+            font-size:
+                10px;
+
+            font-weight:
+                700;
+
+            letter-spacing:
+                1.2px;
+
+            color:
+                #8a97aa;
+
+        }
+
+
+        .categoria-nombre {
+
+            font-size:
+                13px;
+
+            font-weight:
+                600;
+
+            color:
+                #1677ff;
+
+        }
+
 
         /* =====================================
            INDICADOR
@@ -1910,12 +2069,17 @@ function abrirConfirmacionEliminar(
 // EJECUTAR ELIMINACIÓN
 // ============================================================
 
-async function ejecutarEliminacion(id, elemento) {
+async function ejecutarEliminacion(
+    id,
+    elemento
+) {
 
     try {
 
         const usuarioGuardado =
-            localStorage.getItem("usuario");
+            localStorage.getItem(
+                "usuario"
+            );
 
 
         if (!usuarioGuardado) {
@@ -1928,10 +2092,15 @@ async function ejecutarEliminacion(id, elemento) {
 
 
         const usuario =
-            JSON.parse(usuarioGuardado);
+            JSON.parse(
+                usuarioGuardado
+            );
 
 
-        if (!usuario || !usuario.id) {
+        if (
+            !usuario ||
+            !usuario.id
+        ) {
 
             throw new Error(
                 "La información del usuario no es válida."
@@ -1944,15 +2113,25 @@ async function ejecutarEliminacion(id, elemento) {
             await fetch(
                 `${API_URL}/conversaciones/${id}`,
                 {
-                    method: "DELETE",
+
+                    method:
+                        "DELETE",
 
                     headers: {
-                        "Content-Type": "application/json"
+
+                        "Content-Type":
+                            "application/json"
+
                     },
 
-                    body: JSON.stringify({
-                        usuario_id: usuario.id
-                    })
+                    body:
+                        JSON.stringify({
+
+                            usuario_id:
+                                usuario.id
+
+                        })
+
                 }
             );
 
@@ -1975,8 +2154,12 @@ async function ejecutarEliminacion(id, elemento) {
 
 
         if (
-            String(conversacionActual) ===
-            String(id)
+            String(
+                conversacionActual
+            ) ===
+            String(
+                id
+            )
         ) {
 
             conversacionActual =
@@ -2016,6 +2199,17 @@ async function ejecutarEliminacion(id, elemento) {
 // ============================================================
 
 function mostrarEstadoInicial() {
+
+    if (categoriaConversacion) {
+
+        categoriaConversacion.hidden =
+            true;
+
+        categoriaConversacionNombre.textContent =
+            "";
+
+    }
+
 
     chatArea.innerHTML = `
 
