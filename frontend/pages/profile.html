@@ -5,60 +5,212 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <title>Mi Perfil</title>
+    <title>Mi Perfil | Evolut</title>
 
-    <link rel="stylesheet" href="../css/global.css">
-    <link rel="stylesheet" href="../css/components.css">
-    <link rel="stylesheet" href="../css/home.css">
+    <link
+        rel="stylesheet"
+        href="../css/global.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../css/components.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../css/profile.css"
+    >
 
 </head>
 
 <body>
 
-<div class="content">
+    <main class="perfil-container">
 
-    <div class="welcome">
 
-        <h1>Mi Perfil</h1>
+        <!-- =========================
+             ENCABEZADO
+        ========================== -->
 
-        <p>Información de la cuenta.</p>
+        <section class="perfil-header">
 
-    </div>
+            <span class="perfil-etiqueta">
+                CONFIGURACIÓN DE CUENTA
+            </span>
 
-    <div class="chat-area">
+            <h1>
+                Mi perfil
+            </h1>
 
-        <h3>Nombre</h3>
+            <p>
+                Gestiona la información de tu cuenta y mantén tus datos actualizados.
+            </p>
 
-        <p id="nombre"></p>
+        </section>
 
-        <br>
 
-        <h3>Correo</h3>
+        <!-- =========================
+             TARJETA DEL PERFIL
+        ========================== -->
 
-        <p id="correo"></p>
+        <section class="perfil-card">
 
-        <br><br>
 
-        <button id="btnHome">
+            <!-- =========================
+                 PANEL DEL USUARIO
+            ========================== -->
 
-            Volver al inicio
+            <div class="perfil-resumen">
 
-        </button>
+                <div
+                    class="perfil-avatar"
+                    id="avatar"
+                >
+                    ?
+                </div>
 
-        <button id="btnSalir">
 
-            Cerrar sesión
+                <h2
+                    id="nombreResumen"
+                >
+                    Usuario
+                </h2>
 
-        </button>
 
-    </div>
+                <div class="estado-cuenta">
 
-</div>
+                    <span class="estado-punto"></span>
 
-<script src="../js/profile.js"></script>
+                    Cuenta activa
+
+                </div>
+
+            </div>
+
+
+            <!-- =========================
+                 INFORMACIÓN
+            ========================== -->
+
+            <div class="perfil-info">
+
+                <h2>
+                    Información personal
+                </h2>
+
+                <p class="perfil-descripcion">
+
+                    Estos datos identifican tu cuenta dentro de Evolut.
+
+                </p>
+
+
+                <!-- NOMBRE -->
+
+                <div class="perfil-campo">
+
+                    <label for="nombre">
+
+                        Nombre completo
+
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nombre"
+                        placeholder="Ingresa tu nombre"
+                    >
+
+                </div>
+
+
+                <!-- CORREO -->
+
+                <div class="perfil-campo">
+
+                    <label for="correo">
+
+                        Correo electrónico
+
+                    </label>
+
+                    <input
+                        type="email"
+                        id="correo"
+                        readonly
+                    >
+
+                    <small class="perfil-ayuda">
+
+                        El correo está asociado a tu cuenta de inicio de sesión.
+
+                    </small>
+
+                </div>
+
+
+                <!-- MENSAJE -->
+
+                <div
+                    id="mensajePerfil"
+                    class="mensaje-perfil"
+                ></div>
+
+
+                <!-- GUARDAR -->
+
+                <button
+                    id="btnGuardar"
+                    class="btn-guardar"
+                >
+
+                    Guardar cambios
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             ACCIONES
+        ========================== -->
+
+        <section class="perfil-acciones">
+
+            <button
+                id="btnHome"
+                class="btn-volver"
+            >
+
+                ← Volver a Evolut
+
+            </button>
+
+
+            <button
+                id="btnSalir"
+                class="btn-salir"
+            >
+
+                Cerrar sesión
+
+            </button>
+
+        </section>
+
+
+    </main>
+
+
+    <script src="../js/profile.js"></script>
 
 </body>
 
