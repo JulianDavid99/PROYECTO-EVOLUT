@@ -1,4 +1,9 @@
-const API_URL = "https://evolut.onrender.com/api";
+const API_URL = "https://evolut-api-2qwc.onrender.com/api";
+
+
+// =========================
+// OBTENER USUARIO
+// =========================
 
 const usuario = JSON.parse(
     localStorage.getItem("usuario")
@@ -60,27 +65,31 @@ async function cargarPerfil() {
             );
 
 
-        const datos =
-            await respuesta.json();
-
-
+        // Primero verificar si la respuesta fue correcta
         if (!respuesta.ok) {
 
+            const texto =
+                await respuesta.text();
+
             throw new Error(
-                datos.mensaje ||
-                "No fue posible cargar el perfil."
+                `Error ${respuesta.status}: ${texto}`
             );
 
         }
 
 
-        // Mostrar datos
+        // Solo convertir a JSON si la respuesta fue correcta
+        const datos =
+            await respuesta.json();
+
+
+        // Mostrar datos en los campos
 
         inputNombre.value =
-            datos.nombre;
+            datos.nombre || "";
 
         inputCorreo.value =
-            datos.correo;
+            datos.correo || "";
 
 
         // Actualizar resumen
@@ -153,7 +162,7 @@ function actualizarResumen(nombre) {
         nombre.trim();
 
 
-    // Inicial
+    // Mostrar inicial
 
     avatar.textContent =
         nombreLimpio
@@ -161,7 +170,7 @@ function actualizarResumen(nombre) {
             .toUpperCase();
 
 
-    // Nombre
+    // Mostrar nombre
 
     nombreResumen.textContent =
         nombreLimpio;
@@ -181,6 +190,8 @@ btnGuardar.addEventListener(
             inputNombre.value.trim();
 
 
+        // Validar nombre
+
         if (!nombre) {
 
             mostrarMensaje(
@@ -192,6 +203,8 @@ btnGuardar.addEventListener(
 
         }
 
+
+        // Desactivar botón
 
         btnGuardar.disabled =
             true;
@@ -227,15 +240,30 @@ btnGuardar.addEventListener(
                 );
 
 
+            // Verificar respuesta antes de convertir a JSON
+
+            if (!respuesta.ok) {
+
+                const texto =
+                    await respuesta.text();
+
+                throw new Error(
+                    `Error ${respuesta.status}: ${texto}`
+                );
+
+            }
+
+
             const datos =
                 await respuesta.json();
 
 
-            if (!respuesta.ok) {
+            // Verificar que llegó el usuario
+
+            if (!datos.usuario) {
 
                 throw new Error(
-                    datos.mensaje ||
-                    "No fue posible actualizar el perfil."
+                    "El servidor no devolvió los datos del usuario."
                 );
 
             }
@@ -256,11 +284,17 @@ btnGuardar.addEventListener(
             usuario.nombre =
                 datos.usuario.nombre;
 
+            usuario.correo =
+                datos.usuario.correo;
+
 
             // Actualizar interfaz
 
             inputNombre.value =
                 datos.usuario.nombre;
+
+            inputCorreo.value =
+                datos.usuario.correo;
 
 
             actualizarResumen(
